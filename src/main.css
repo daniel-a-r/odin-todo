@@ -2,6 +2,99 @@
   box-sizing: border-box;
 }
 
+:root {
+  --hover-color: hsl(218, 15%, 90%);
+  --active-color: hsl(218, 10%, 87%);
+  --selected-color: hsl(218, 10%, 85%);
+}
+
 body {
   margin: 0;
+  height: 100vh;
+  font-family: 'Inter', 'Robot', sans-serif;
+  font-size: 1rem;
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  grid-template-rows: 1fr;
 }
+
+p {
+  margin: 0;
+}
+
+svg {
+  height: 1.5rem;
+  aspect-ratio: 1/1;
+  fill: hsl(210, 2%, 49%);
+}
+
+hr {
+  height: 1px;
+  border: none;
+  border-top: solid 2px #d3d8dd;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background-color: inherit;
+  border-radius: 0.3rem;
+
+  &:hover {
+    background-color: var(--hover-color);
+  }
+
+  &:active {
+    background-color: var(--active-color);
+  }
+}
+
+aside {
+  background-color: #f2f5f7;
+  height: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 4rem;
+
+  p {
+    color: #2b323b;
+  }
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: max-content;
+  padding: 0.3rem;
+}
+
+.add-project {
+  margin-bottom: 1.5rem;
+  padding-right: 0.5rem;
+
+  
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project {
+  width: 100%;
+}
+
+.selected {
+  background-color: var(--selected-color);
+
+  &:hover {
+    background-color: var(--selected-color);
+  }
+}
+
+main {
+  background-color: #fff;
+}
+

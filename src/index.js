@@ -1,3 +1,5 @@
+import './main.css'
+
 // if key 'projects' does not exist, create default item
 // else, print to console
 if (!localStorage.getItem('projects')) {
