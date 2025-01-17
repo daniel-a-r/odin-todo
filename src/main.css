@@ -18,7 +18,7 @@ body {
   grid-template-rows: 1fr;
 }
 
-p {
+p, h1, h3 {
   margin: 0;
 }
 
@@ -49,16 +49,15 @@ button {
   }
 }
 
+p {
+  color: #2b323b;
+}
+
 aside {
   background-color: #f2f5f7;
   height: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 4rem;
-
-  p {
-    color: #2b323b;
-  }
+  padding: 4rem 2rem;
+  padding-bottom: 0;
 }
 
 .button-container {
@@ -72,8 +71,6 @@ aside {
 .add-project {
   margin-bottom: 1.5rem;
   padding-right: 0.5rem;
-
-  
 }
 
 .projects-container {
@@ -96,5 +93,27 @@ aside {
 
 main {
   background-color: #fff;
+  padding: 4rem 8rem;
+  padding-bottom: 0;
 }
 
+.project-header {
+  margin-bottom: 2.5rem;
+}
+
+.project-title > h1 {
+  margin-bottom: 1rem;
+}
+
+.todo-title {
+  padding: 0.25rem;
+  border-bottom: solid 2px black;
+}
+
+.checklist {
+  padding-top: 1rem;
+}
+
+input[type="checkbox"] {
+  margin: 0.25rem;
+}
