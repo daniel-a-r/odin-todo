@@ -114,6 +114,20 @@ main {
   padding-top: 1rem;
 }
 
+.checklist-item {
+  display: flex;
+  align-items: center;
+
+  > div {
+    display: flex;
+  }
+
+  svg {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+}
+
 input[type="checkbox"] {
   margin: 0.25rem;
 }
