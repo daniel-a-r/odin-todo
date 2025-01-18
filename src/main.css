@@ -132,8 +132,11 @@ main {
   aspect-ratio: 1/1;
 }
 
+.project-desc {
+  margin-top: 1rem;
+}
+
 .todo-title {
-  /* justify-content: space-between; */
   padding: 0.25rem;
   border-bottom: solid 2px black;
 
@@ -141,10 +144,6 @@ main {
     height: 1.5rem;
     aspect-ratio: 1/1;
   }
-}
-
-.project-desc {
-  margin-top: 1rem;
 }
 
 .checklist {
