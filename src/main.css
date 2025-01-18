@@ -6,6 +6,15 @@
   --hover-color: hsl(218, 15%, 90%);
   --active-color: hsl(218, 10%, 87%);
   --selected-color: hsl(218, 10%, 85%);
+  --due-date-text-color: hsl(218, 10%, 35%);
+  --border-style: solid;
+  --border-width: 0.125rem;
+  --priority-low-border: var(--border-width) var(--border-style) var(--selected-color);
+  --priority-low-text-color: hsl(218, 10%, 70%);
+  --priority-important-border: var(--border-width) var(--border-style) hsl(45, 100%, 80%);
+  --priority-important-text-color: hsl(45, 90%, 65%);
+  --priority-urgent-border: var(--border-width) var(--border-style) hsl(354, 75%, 70%);
+  --priority-urgent-text-color: hsl(354, 75%, 65%);
 }
 
 body {
@@ -97,37 +106,113 @@ main {
   padding-bottom: 0;
 }
 
+.options-button {
+  padding: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: #2b323b;
+  }
+}
+
 .project-header {
   margin-bottom: 2.5rem;
 }
 
-.project-title > h1 {
-  margin-bottom: 1rem;
+.project-title,
+.todo-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-title .options-button {
+  height: 2rem;
+  aspect-ratio: 1/1;
 }
 
 .todo-title {
+  /* justify-content: space-between; */
   padding: 0.25rem;
   border-bottom: solid 2px black;
+
+  .options-button {
+    height: 1.5rem;
+    aspect-ratio: 1/1;
+  }
+}
+
+.project-desc {
+  margin-top: 1rem;
 }
 
 .checklist {
-  padding-top: 1rem;
+  padding: 1rem 0.25rem;
+  padding-bottom: 0;
 }
 
 .checklist-item {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 0.3rem;
 
   > div {
     display: flex;
   }
 
-  svg {
-    height: 1.2rem;
-    width: 1.2rem;
+  .options-button {
+    height: 1.4rem;
+    aspect-ratio: 1/1;
   }
 }
 
 input[type="checkbox"] {
-  margin: 0.25rem;
+  margin: 0;
+  height: 1rem;
+  aspect-ratio: 1/1;
+}
+
+.due-date,
+.priority {
+  font-size: 0.9rem;
+  border-radius: 0.2rem;
+}
+
+.due-date {
+  background-color: var(--selected-color);
+  padding: 0.05rem 0.25rem;
+
+  p {
+    color: var(--due-date-text-color);
+  }
+}
+
+.priority {
+  padding: 0 0.25rem;
+}
+
+.priority.low {
+  border: var(--priority-low-border);
+
+  p {
+    color: var(--priority-low-text-color);
+  }
+}
+
+.priority.important {
+ border: var(--priority-important-border);
+
+ p {
+  color: var(--priority-important-text-color);
+ }
+}
+
+.priority.urgent {
+  border: var(--priority-urgent-border);
+
+  p {
+    color: var(--priority-urgent-text-color);
+  }
 }

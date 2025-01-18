@@ -34,28 +34,47 @@
   </aside>
   <main>
     <div class="project-header">
-      <div class="project-title"><h1>Project Title</h1></div>
+      <div class="project-title">
+        <h1>Project Title</h1>
+        <button class="options-button">
+          <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+          </svg>
+        </button>
+      </div>
       <div class="project-desc"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
       </div>
     </div>
     <div class="todo-container">
       <div class="todo-title">
         <h3>Todo Title</h3>
+        <button class="options-button">
+          <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+          </svg>
+        </button>
       </div>
       <div class="checklist">
         <div class="checklist-item">
           <input type="checkbox" id="1">
           <p>Todo this</p>
           <div class="due-date">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="calender-range">
-              <path d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z" />
-            </svg>
+            <p>Due Jan 14</p>
           </div>
-          <div class="priority">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="exclamation">
-              <path d="M 11,4L 13,4L 13,15L 11,15L 11,4 Z M 13,18L 13,20L 11,20L 11,18L 13,18 Z" />
-            </svg>
+          <div class="priority low">
+            <p>Low</p>
           </div>
+          <div class="priority important">
+            <p>Important</p>
+          </div>
+          <div class="priority urgent">
+            <p>Urgent</p>
+          </div>
+          <button class="options-button">
+            <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
