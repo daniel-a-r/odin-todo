@@ -1,4 +1,9 @@
 import './main.css'
+import { Project, Todo, ChecklistItem } from './objs.js'
+
+const proj = new Project('hello');
+proj.title = 'world';
+console.log(proj.title);
 
 // if key 'projects' does not exist, create default item
 // else, print to console
