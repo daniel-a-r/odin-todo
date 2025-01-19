@@ -10,7 +10,7 @@
 </head>
 <body>
   <aside>
-    <button class="add-project button-container">
+    <button class="add-button add-project button-container">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="plus-circle">
         <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
       </svg>
@@ -52,39 +52,41 @@
       <div class="project-desc"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
       </div>
     </div>
+
     <div class="todo-container">
-      <div class="todo-title">
-        <h3>Todo Title</h3>
-        <div class="dropdown">
-          <button class="options-button">
-            <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
-            </svg>
-          </button>
-          <div class="dropdown-options">
-            <ul>
-              <li><button class="edit">Edit</button></li>
-              <li><button class="delete">Delete</button></li>
-            </ul>
+      <div class="todo-list">
+        <div class="todo-title">
+          <h3>Todo Title</h3>
+          <div class="dropdown">
+            <button class="options-button">
+              <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+              </svg>
+            </button>
+            <div class="dropdown-options">
+              <ul>
+                <li><button class="edit">Edit</button></li>
+                <li><button class="delete">Delete</button></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="checklist">
-        <div class="checklist-item">
-          <input type="checkbox" id="1">
-          <p>Todo this</p>
-          <div class="due-date">
-            <p>Due Jan 14</p>
-          </div>
-          <div class="priority low">
-            <p>Low</p>
-          </div>
-          <div class="priority important">
-            <p>Important</p>
-          </div>
-          <div class="priority urgent">
-            <p>Urgent</p>
-          </div>
+        <div class="checklist">
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
             <div class="dropdown">
               <button class="options-button">
                 <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -97,10 +99,354 @@
                   <li><button class="delete">Delete</button></li>
                 </ul>
               </div>
-            </div> 
+            </div>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
+        <button class="add-button add-todo button-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="plus-circle">
+            <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+          </svg>
+          <p>Add Todo</p>
+        </button>
+      </div>
+
+      <div class="todo-list">
+        <div class="todo-title">
+          <h3>Todo Title</h3>
+          <div class="dropdown">
+            <button class="options-button">
+              <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+              </svg>
+            </button>
+            <div class="dropdown-options">
+              <ul>
+                <li><button class="edit">Edit</button></li>
+                <li><button class="delete">Delete</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="checklist">
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="add-button add-todo button-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="plus-circle">
+            <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+          </svg>
+          <p>Add Todo</p>
+        </button>
+      </div>
+
+      <div class="todo-list">
+        <div class="todo-title">
+          <h3>Todo Title</h3>
+          <div class="dropdown">
+            <button class="options-button">
+              <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+              </svg>
+            </button>
+            <div class="dropdown-options">
+              <ul>
+                <li><button class="edit">Edit</button></li>
+                <li><button class="delete">Delete</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="checklist">
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="1">
+            <p>Todo this</p>
+            <div class="due-date">
+              <p>Due Jan 14</p>
+            </div>
+            <div class="priority low">
+              <p>Low</p>
+            </div>
+            <div class="priority important">
+              <p>Important</p>
+            </div>
+            <div class="priority urgent">
+              <p>Urgent</p>
+            </div>
+            <div class="dropdown">
+              <button class="options-button">
+                <svg class="dots-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+                </svg>
+              </button>
+              <div class="dropdown-options">
+                <ul>
+                  <li><button class="edit">Edit</button></li>
+                  <li><button class="delete">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="add-button add-todo button-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="plus-circle">
+            <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+          </svg>
+          <p>Add Todo</p>
+        </button>
       </div>
     </div>
+
+    <button class="add-button add-todo-list button-container">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="plus-circle">
+        <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+      </svg>
+      <p>Add Todo List</p>
+    </button>
   </main>
+
+  <dialog class="edit-project">
+    <form>
+      <div>
+        <label for="project-title">Title:</label>
+        <input type="text" id="project-title" required>
+      </div>
+      <div>
+        <label for="project-desc">Description:</label>
+        <input type="textarea" id="project-desc">
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="edit-todo-list">
+    <form>
+      <div>
+        <label for="todo-list-title">Title:</label>
+        <input type="text" id="todo-list-title" required>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="edit-todo-item">
+    <form>
+      <div>
+        <label for="todo-item-title">Todo:</label>
+        <input type="text" id="todo-item-title" required>
+      </div>
+      <div>
+        <label for="due-date">Due Date:</label>
+        <input type="date" id="due-date">
+      </div>
+      <div>
+        <label for="priority"></label>
+        <select id="priority">
+          <option value="" selected></option>
+          <option value="low">Low</option>
+          <option value="important">Important</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>
