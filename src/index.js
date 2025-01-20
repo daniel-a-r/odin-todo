@@ -1,5 +1,5 @@
 import './main.css'
-import { Project, Todo, ChecklistItem, projectList } from './todo.js'
+import { Project, Todo, ChecklistItem, projectList } from './objHandler.js'
 import * as ls from './localStorageHandler.js';
 import * as htmlHelper from './htmlHelper.js';
 
