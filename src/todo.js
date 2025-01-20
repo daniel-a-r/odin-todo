@@ -1,4 +1,4 @@
-export class Project {
+class Project {
   constructor(title, desc=null) {
     this.title = title;
     this.desc = desc;
@@ -10,7 +10,7 @@ export class Project {
   removeAtIndex(i) { this.todoList.splice(i, 1); }
 }
 
-export class Todo {
+class Todo {
   constructor(title) {
     this.title = title
     this.checklist = [];
@@ -21,7 +21,7 @@ export class Todo {
   removeAtIndex(i) { this.checklist.splice(i, 1); }
 }
 
-export class ChecklistItem {
+class ChecklistItem {
   constructor(text, dueDate=null, priority=null) {
     this.text = text;
     this.dueDate = dueDate;
