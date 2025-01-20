@@ -10,11 +10,22 @@ const createSVG = (pathDrawn) => {
 };
 
 const createPlusCircle = () => {
-  pathDrawn = 'M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z';
+  const pathDrawn = 'M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z';
   return createSVG(pathDrawn);
 }
 
 const createInbox = () => {
-  pathDrawn = 'M19,15H15A3,3 0 0,1 12,18A3,3 0 0,1 9,15H5V5H19M19,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z';
+  const pathDrawn = 'M19,15H15A3,3 0 0,1 12,18A3,3 0 0,1 9,15H5V5H19M19,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z';
   return createSVG(pathDrawn);
+};
+
+export const createProjectButton = (index, projectTitle) => {
+  const button = document.createElement('button');
+  button.classList.add('button-container', 'project');
+  button.dataset.key = index;
+  const p = document.createElement('p');
+  p.classList.add('project-title');
+  p.textContent = projectTitle;
+  button.append(createInbox(), p);
+  return button;
 };
