@@ -19,13 +19,45 @@ const createInbox = () => {
   return createSVG(pathDrawn);
 };
 
-export const createProjectButton = (index, projectTitle) => {
+export const createProjectButtonList = (projectList) => {
+  const projectButtons = [];
+
+  projectList.forEach((project, indx) => {
+    projectButtons.push(createProjectButton(project, indx));
+  });
+
+  return projectButtons;
+}
+
+export const createProjectButton = (project, indx) => {
   const button = document.createElement('button');
   button.classList.add('button-container', 'project');
-  button.dataset.key = index;
+  button.dataset.key = indx;
   const p = document.createElement('p');
   p.classList.add('project-title');
-  p.textContent = projectTitle;
+  p.textContent = project.title;
   button.append(createInbox(), p);
+
+  button.addEventListener('click', () => handleProjectSelect(button));
+
   return button;
 };
+
+const handleProjectSelect = (newSelectedButton) => {
+  const prevSelectedButton = document.querySelector('.selected');
+  if (prevSelectedButton !== null) {
+    prevSelectedButton.classList.toggle('selected');
+  }
+  newSelectedButton.classList.toggle('selected');
+};
+
+const createProjectTitle = (projectTitle) => {
+  const div = document.createElement('div');
+  div.classList.add('project-title');
+
+  const h1 = document.createElement('h1');
+  h1.textContent = projectTitle;
+
+  div.appendChild(h1);
+  return div;
+}
