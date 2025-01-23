@@ -1,12 +1,12 @@
 import './main.css'
 import * as ls from './localStorageHandler.js';
-import * as htmlHelper from './htmlHelper.js';
+import * as htmlBuilder from './htmlBuilder.js';
 
 const page = (function () {
   const init = () => {
     const projContainer = document.querySelector('.projects-container');
     const projList = ls.getProjectList();
-    const projButtonList = htmlHelper.createProjectButtonList(projList);
+    const projButtonList = htmlBuilder.createProjectButtonList(projList);
     projContainer.append(...projButtonList);
     // addProjectButtonEventListeners();
   };
@@ -16,7 +16,7 @@ const page = (function () {
     ls.createProject('New Project');
     const projTitle = ls.getProjectTitles().at(-1);
     const lastIndx = ls.getProjectList.length - 1;
-    const projectButton = htmlHelper.createProjectButton(projTitle, lastIndx);
+    const projectButton = htmlBuilder.createProjectButton(projTitle, lastIndx);
     projContainer.appendChild(projectButton);
   };
 
