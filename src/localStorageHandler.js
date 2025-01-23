@@ -13,16 +13,16 @@ export const init = () => {
   } else {
     projectList = JSON.parse(localStorage.getItem('projects'));
   }
-}
+};
 
 const updateLocalStorage = () => {
   localStorage.setItem('projects', JSON.stringify(projectList));
-}
+};
 
 export const getProjectTitles = () => {
   const projList = JSON.parse(localStorage.getItem('projects'));
   return projList.map((project) => project.title );
-}
+};
 
 export const getLastProjectTitle = () => getProjectTitles().at(-1);
 

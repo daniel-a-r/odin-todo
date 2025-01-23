@@ -12,7 +12,7 @@ const addProjectListSelectEvent = () => {
   for (const project of projectList.children) {
     project.addEventListener('click', () => handleProjectSelect(project));
   }
-}
+};
 
 const handleAddProject = () => {
   const projContainer = document.querySelector('.projects-container');
