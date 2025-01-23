@@ -24,6 +24,12 @@ export const getProjectTitles = () => {
   return projList.map((project) => project.title );
 }
 
+export const getLastProjectTitle = () => getProjectTitles().at(-1);
+
+export const getLastProjectIndex = () => projectList.length - 1;
+
+export const getProject = (index) => projectList[index];
+
 export const createProject = (title) => {
   const project = new Project(title);
   projectList.push(project);
