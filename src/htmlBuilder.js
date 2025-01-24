@@ -278,7 +278,7 @@ const createAddToChecklistButton = () => {
   button.append(plusCircle, para);
 
   return button;
-}
+};
 
 const createAddTodoButton = () => {
   const button = document.createElement('button');
@@ -291,4 +291,4 @@ const createAddTodoButton = () => {
   button.append(plusCircle, para);
 
   return button;
-}
+};
