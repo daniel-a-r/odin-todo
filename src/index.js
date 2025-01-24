@@ -1,5 +1,5 @@
 import './main.css'
-import * as ls from './localStorageHandler.js';
+import * as ls from './storageHandlers.js';
 import * as htmlBuilder from './htmlBuilder.js';
 import * as eventHandlers from './eventHandlers.js';
 

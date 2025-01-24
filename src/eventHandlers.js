@@ -1,4 +1,4 @@
-import * as ls from './localStorageHandler';
+import * as storage from './storageHandlers';
 import * as htmlBuilder from './htmlBuilder';
 
 export const init = () => {
@@ -16,9 +16,9 @@ const addProjectListSelectEvent = () => {
 
 const handleAddProject = () => {
   const projContainer = document.querySelector('.projects-container');
-  ls.createProject('New Project');
-  const projTitle = ls.getLastProjectTitle();
-  const lastIndx = ls.getLastProjectIndex();
+  storage.createProject('New Project');
+  const projTitle = storage.getLastProjectTitle();
+  const lastIndx = storage.getLastProjectIndex();
   const projectButton = htmlBuilder.createProjectButton(projTitle, lastIndx);
   projectButton.addEventListener('click', () => handleProjectSelect(projectButton));
   projContainer.appendChild(projectButton);
@@ -33,7 +33,11 @@ const handleProjectSelect = (newSelectedButton) => {
 
   htmlBuilder.clearMain();
   newSelectedButton.classList.add('selected');
-  
-  const project = ls.getProject(newSelectedButton.dataset.key);
+
+  const project = storage.getProject(newSelectedButton.dataset.key);
   htmlBuilder.createProjectSection(project);
 };
+
+const addMainEventHandlers = () => {
+
+}
