@@ -56,9 +56,9 @@ export const createProjectSection = (project) => {
   const main = document.querySelector('main');
   const projectHeader = createProjectHeader(project.title, project.desc);
   const todoContainer = createTodoContainter(project.todoList);
-  // const addTodoButton
+  const addTodoButton = createAddTodoButton();
 
-  main.append(projectHeader, todoContainer);
+  main.append(projectHeader, todoContainer, addTodoButton);
 };
 
 const createProjectHeader = (projecTitle, projectDesc) => {
@@ -274,6 +274,19 @@ const createAddToChecklistButton = () => {
   const plusCircle = createPlusCircle();
   const para = document.createElement('p');
   para.textContent = 'Add to checklist';
+
+  button.append(plusCircle, para);
+
+  return button;
+}
+
+const createAddTodoButton = () => {
+  const button = document.createElement('button');
+  button.classList.add('add-button', 'add-todo', 'button-container');
+
+  const plusCircle = createPlusCircle();
+  const para = document.createElement('p');
+  para.textContent = 'Add Todo';
 
   button.append(plusCircle, para);
 
