@@ -26,10 +26,14 @@ const handleAddProject = () => {
 
 const handleProjectSelect = (newSelectedButton) => {
   const prevSelectedButton = document.querySelector('.selected');
+
   if (prevSelectedButton !== null) {
-    prevSelectedButton.classList.toggle('selected');
+    prevSelectedButton.classList.remove('selected');
   }
-  newSelectedButton.classList.toggle('selected');
+
+  htmlBuilder.clearMain();
+  newSelectedButton.classList.add('selected');
+  
   const project = ls.getProject(newSelectedButton.dataset.key);
   htmlBuilder.createProjectSection(project);
 };

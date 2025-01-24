@@ -66,9 +66,12 @@ const createProjectHeader = (projecTitle, projectDesc) => {
   div.classList.add('project-header');
 
   const projectTitleElem = createProjectTitle(projecTitle);
-  const projectDescElem = createprojectDesc(projectDesc);
+  div.appendChild(projectTitleElem);
 
-  div.append(projectTitleElem, projectDescElem);
+  if (projectDesc) {
+    const projectDescElem = createprojectDesc(projectDesc);
+    div.appendChild(projectDescElem);
+  }
 
   return div;
 };
@@ -291,4 +294,12 @@ const createAddTodoButton = () => {
   button.append(plusCircle, para);
 
   return button;
+};
+
+export const clearMain = () => {
+  const main = document.querySelector('main');
+
+  while (main.hasChildNodes()) {
+    main.removeChild(main.lastChild);
+  };
 };
