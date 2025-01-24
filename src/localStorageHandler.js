@@ -7,8 +7,53 @@ export const getProjectList = () => projectList;
 export const init = () => {
   // if key 'projects' does not exist, create default item
   if (!localStorage.getItem('projects')) {
-    const proj = new Project('My Project');
-    projectList.push(proj);
+    let projDesc = 'Lorem ipsum odor amet, consectetuer adipiscing elit. Curabitur ut mattis porta ultricies sapien leo ex. Ligula montes maximus himenaeos quisque urna nec.';
+    const proj1 = new Project('My Project 1', projDesc);
+    const todo1 = new Todo('Todo1');
+    const checklistItem1 = new ChecklistItem('first thing to do', null, 'low');
+    const checklistItem2 = new ChecklistItem('second thing to do', null, 'important');
+    const checklistItem3 = new ChecklistItem('third thing to do', null, 'urgent');
+    const checklistItem4 = new ChecklistItem('fourth thing');
+
+    todo1.pushToChecklist(checklistItem1);
+    todo1.pushToChecklist(checklistItem2);
+    todo1.pushToChecklist(checklistItem3);
+    todo1.pushToChecklist(checklistItem4);
+
+    proj1.pushTodoList(todo1);
+
+    const todo2 = new Todo('Todo2');
+    const checklistItem5 = new ChecklistItem('first thing to do', null, 'low');
+    const checklistItem6 = new ChecklistItem('second thing to do', null, 'important');
+    const checklistItem7 = new ChecklistItem('third thing to do', null, 'urgent');
+    const checklistItem8 = new ChecklistItem('fourth thing');
+
+    todo2.pushToChecklist(checklistItem5);
+    todo2.pushToChecklist(checklistItem6);
+    todo2.pushToChecklist(checklistItem7);
+    todo2.pushToChecklist(checklistItem8);
+
+    proj1.pushTodoList(todo2);
+
+    projectList.push(proj1);
+
+    projDesc = 'Lorem ipsum odor amet, consectetuer adipiscing elit. Nostra consectetur fermentum velit duis sit lacus dolor id. Penatibus condimentum nascetur laoreet rutrum tempor nisi tempus mollis.';
+    const proj2 = new Project('My Project 2', projDesc);
+    const todo3 = new Todo('Todo3');
+    const checklistItem9 = new ChecklistItem('first thing to do', null, 'low');
+    const checklistItem10 = new ChecklistItem('second thing to do', null, 'important');
+    const checklistItem11 = new ChecklistItem('third thing to do', null, 'urgent');
+    const checklistItem12 = new ChecklistItem('fourth thing');
+
+    todo3.pushToChecklist(checklistItem9);
+    todo3.pushToChecklist(checklistItem10);
+    todo3.pushToChecklist(checklistItem11);
+    todo3.pushToChecklist(checklistItem12);
+
+    proj2.pushTodoList(todo3);
+
+    projectList.push(proj2);
+    
     localStorage.setItem('projects', JSON.stringify(projectList));
   } else {
     projectList = JSON.parse(localStorage.getItem('projects'));

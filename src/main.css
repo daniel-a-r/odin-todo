@@ -80,9 +80,12 @@ aside {
   padding: 0.3rem;
 }
 
+.add-button {
+  padding-right: 0.5rem;
+}
+
 .add-project.add-button {
   margin-bottom: 1.5rem;
-  padding-right: 0.5rem;
 }
 
 .projects-container {
@@ -289,7 +292,11 @@ input[type="checkbox"] {
   }
 }
 
-.add-todo-list {
+.add-todo {
   align-self: center;
+}
+
+.add-todo,
+.add-checklist-item {
   background-color: var(--hover-color);
 }

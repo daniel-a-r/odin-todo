@@ -54,10 +54,11 @@ export const createProjectButton = (projectTitle, indx) => {
 
 export const createProjectSection = (project) => {
   const main = document.querySelector('main');
-  console.log(project);
   const projectHeader = createProjectHeader(project.title, project.desc);
+  const todoContainer = createTodoContainter(project.todoList);
+  // const addTodoButton
 
-  main.append(projectHeader);
+  main.append(projectHeader, todoContainer);
 };
 
 const createProjectHeader = (projecTitle, projectDesc) => {
@@ -154,3 +155,127 @@ const createprojectDesc = (projectDesc) => {
 
   return div;
 };
+
+const createTodoContainter = (todoList) => {
+  const todoContainer = document.createElement('div');
+  todoContainer.classList.add('todo-container');
+
+  todoList.forEach((todo, indx) => {
+    const todoElem = createTodo(todo, indx);
+    todoContainer.appendChild(todoElem);
+  });
+
+  return todoContainer;
+};
+
+const createTodo = (todo, indx) => {
+  const todoElem = document.createElement('div');
+  todoElem.classList.add('todo');
+  todoElem.dataset.key = indx;
+
+  const todoTitle = createTodoTitle(todo.title);
+  const checklist = createChecklist(todo.checklist);
+  const addToChecklistButton = createAddToChecklistButton();
+
+  todoElem.append(todoTitle, checklist, addToChecklistButton);
+
+  return todoElem;
+};
+
+const createTodoTitle = (todoTitle) => {
+  const todoTitleDiv = document.createElement('div');
+  todoTitleDiv.classList.add('todo-title');
+
+  const todoTitleH1 = document.createElement('h3');
+  todoTitleH1.textContent = todoTitle;
+
+  const dropdown = createDropdown();
+
+  todoTitleDiv.append(todoTitleH1, dropdown);
+
+  return todoTitleDiv;
+};
+
+const createChecklist = (todoChecklist) => {
+  const checklistDiv = document.createElement('div');
+  checklistDiv.classList.add('checklist');
+
+  todoChecklist.forEach((checklistItem, indx) => {
+    const checklistItemDiv = createChecklistItem(checklistItem, indx);
+    checklistDiv.appendChild(checklistItemDiv);
+  });
+
+  return checklistDiv;
+};
+
+const createChecklistItem = (checklistItem, indx) => {
+  const checklistItemDiv = document.createElement('div');
+  checklistItemDiv.classList.add('checklist-item');
+  checklistItemDiv.dataset.key = indx;
+
+  const checkbox = createCheckbox(checklistItem.isDone);
+  const text = createChecklistItemText(checklistItem.text);
+  const dropdown = createDropdown();
+
+  checklistItemDiv.append(checkbox, text);
+
+  if (checklistItem.dueDate) {
+    const dueDate = createDueDateTag(checklistItem.dueDate);
+    checklistItemDiv.appendChild(dueDate);
+  }
+  if (checklistItem.priority) {
+    const priority = createPriorityTag(checklistItem.priority);
+    checklistItemDiv.appendChild(priority);
+  }
+
+  checklistItemDiv.appendChild(dropdown);
+
+  return checklistItemDiv;
+};
+
+const createCheckbox = (isDone) => {
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+
+  return checkbox;
+};
+
+const createChecklistItemText = (text) => {
+  const para = document.createElement('p');
+  para.textContent = text;
+
+  return para;
+};
+
+// TODO: figure out how dates work with date picker
+const createDueDateTag = (dueDate) => {
+  const dueDateTag = document.createElement('div')
+  dueDate.classList.add('due-date');
+
+  return dueDateTag;
+};
+
+const createPriorityTag = (priority) => {
+  const priorityTag = document.createElement('div');
+  priorityTag.classList.add('priority', priority);
+
+  const para = document.createElement('p');
+  para.textContent = priority[0].toUpperCase() + priority.slice(1);
+
+  priorityTag.appendChild(para);
+
+  return priorityTag;
+};
+
+const createAddToChecklistButton = () => {
+  const button = document.createElement('button');
+  button.classList.add('add-button', 'add-checklist-item', 'button-container');
+
+  const plusCircle = createPlusCircle();
+  const para = document.createElement('p');
+  para.textContent = 'Add to checklist';
+
+  button.append(plusCircle, para);
+
+  return button;
+}
