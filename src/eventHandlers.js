@@ -36,8 +36,20 @@ const handleProjectSelect = (newSelectedButton) => {
 
   const project = storage.getProject(newSelectedButton.dataset.key);
   htmlBuilder.createProjectSection(project);
+  addMainEventHandlers();
 };
 
 const addMainEventHandlers = () => {
+  const selectedProject = document.querySelector('.selected');
+  const selectedProjectKey = selectedProject.dataset.key;
 
-}
+  const deleteProjectButton = document.querySelector('.project-title button.delete');
+  console.log(deleteProjectButton);
+
+  deleteProjectButton.addEventListener('click', () => handleDeleteProject(selectedProjectKey));
+};
+
+const handleDeleteProject = (indx) => {
+  const project = storage.getProjectList()[indx];
+  console.log(project);
+};
