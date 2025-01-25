@@ -303,3 +303,12 @@ export const clearMain = () => {
     main.removeChild(main.lastChild);
   };
 };
+
+export const clearChecklist = (todoKey) => {
+  const checklistElem = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
+  console.log(checklistElem);
+};
+
+// export const constUpdateChecklist = (checklist) => {
+
+// }
