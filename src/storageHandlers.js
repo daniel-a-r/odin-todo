@@ -64,8 +64,6 @@ const updateLocalStorage = () => {
   localStorage.setItem('projects', JSON.stringify(projectList));
 };
 
-
-
 export const createProject = (title) => {
   const project = new Project(title);
   projectList.push(project);
@@ -96,6 +94,8 @@ export const getLastProjectIndex = () => projectList.length - 1;
 export const getProject = (index) => projectList[index];
 
 export const getTodo = (i, j) => projectList[i].todoList[j];
+
+export const getChecklist = (i, j) => projectList[i].todoList[j].checklist;
 
 export const getChecklistItem = (i, j, k) => projectList[i].todoList[j].checklist[k];
 
