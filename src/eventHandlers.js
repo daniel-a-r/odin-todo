@@ -1,5 +1,5 @@
 import * as storage from './storageHandlers';
-import * as htmlBuilder from './htmlBuilder';
+import * as htmlHandler from './htmlHandlers';
 
 export const init = () => {
   const addProjectButton = document.querySelector('.add-project');
@@ -19,7 +19,7 @@ const handleAddProject = () => {
   storage.createProject('New Project');
   const projTitle = storage.getLastProjectTitle();
   const lastIndx = storage.getLastProjectIndex();
-  const projectButton = htmlBuilder.createProjectButton(projTitle, lastIndx);
+  const projectButton = htmlHandler.createProjectButton(projTitle, lastIndx);
   projectButton.addEventListener('click', () => handleProjectSelect(projectButton));
   projContainer.appendChild(projectButton);
 };
@@ -31,11 +31,11 @@ const handleProjectSelect = (newSelectedButton) => {
     prevSelectedButton.classList.remove('selected');
   }
 
-  htmlBuilder.clearMain();
+  htmlHandler.clearMain();
   newSelectedButton.classList.add('selected');
 
   const project = storage.getProject(newSelectedButton.dataset.key);
-  htmlBuilder.createProjectSection(project);
+  htmlHandler.createProjectSection(project);
   addMainEventHandlers();
 };
 
@@ -70,7 +70,7 @@ const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
   console.log(todoElem);
   console.log(selectedProject);
 
-  htmlBuilder.clearChecklist(todoElem.dataset.key);
+  htmlHandler.clearChecklist(todoElem.dataset.key);
   const checklist = storage.getChecklist(selectedProject.dataset.key, todoElem.dataset.key);
   console.log(checklist);
 };
