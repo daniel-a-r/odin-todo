@@ -95,9 +95,9 @@ export const getLastProjectIndex = () => projectList.length - 1;
 
 export const getProject = (index) => projectList[index];
 
-export const getTodo = (i, j) = projectList[i].todoList[j];
+export const getTodo = (i, j) => projectList[i].todoList[j];
 
-export const getChecklistItem = (i, j, k) = projectList[i].todoList[j].checklist[k];
+export const getChecklistItem = (i, j, k) => projectList[i].todoList[j].checklist[k];
 
 export const updateProjectTitle = (i, newTitle) => { 
   projectList[i].title = newTitle;
