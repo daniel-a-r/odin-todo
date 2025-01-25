@@ -47,9 +47,30 @@ const addMainEventHandlers = () => {
   console.log(deleteProjectButton);
 
   deleteProjectButton.addEventListener('click', () => handleDeleteProject(selectedProjectKey));
+  addChecklistItemDeleteHandler();
 };
 
 const handleDeleteProject = (indx) => {
   const project = storage.getProjectList()[indx];
   console.log(project);
+};
+
+const addChecklistItemDeleteHandler = () => {
+  const checklistItemDeleteButtonList = document.querySelectorAll('.checklist-item button.delete');
+  for (const checklistItemDeleteButton of checklistItemDeleteButtonList) {
+    checklistItemDeleteButton.addEventListener('click', () => handleDeleteChecklistItem(checklistItemDeleteButton));
+  }
+};
+
+const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
+  const checklistItemElem = checklistItemDeleteButton.closest('.checklist-item');
+  const todoElem = checklistItemElem.closest('.todo');
+  const selectedProject = document.querySelector('button.selected');
+  console.log(checklistItemElem);
+  console.log(todoElem);
+  console.log(selectedProject);
+
+  htmlBuilder.clearChecklist(todoElem.dataset.key);
+  const checklist = storage.getChecklist(selectedProject.dataset.key, todoElem.dataset.key);
+  console.log(checklist);
 };
