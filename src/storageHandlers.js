@@ -64,16 +64,7 @@ const updateLocalStorage = () => {
   localStorage.setItem('projects', JSON.stringify(projectList));
 };
 
-export const getProjectTitles = () => {
-  const projList = JSON.parse(localStorage.getItem('projects'));
-  return projList.map((project) => project.title );
-};
 
-export const getLastProjectTitle = () => getProjectTitles().at(-1);
-
-export const getLastProjectIndex = () => projectList.length - 1;
-
-export const getProject = (index) => projectList[index];
 
 export const createProject = (title) => {
   const project = new Project(title);
@@ -92,6 +83,21 @@ export const createChecklistItem = (i, j, text) => {
   projectList[i].todoList[j].pushToChecklist(checklistItem);
   updateLocalStorage();
 };
+
+export const getProjectTitles = () => {
+  const projList = JSON.parse(localStorage.getItem('projects'));
+  return projList.map((project) => project.title );
+};
+
+export const getLastProjectTitle = () => getProjectTitles().at(-1);
+
+export const getLastProjectIndex = () => projectList.length - 1;
+
+export const getProject = (index) => projectList[index];
+
+export const getTodo = (i, j) = projectList[i].todoList[j];
+
+export const getChecklistItem = (i, j, k) = projectList[i].todoList[j].checklist[k];
 
 export const updateProjectTitle = (i, newTitle) => { 
   projectList[i].title = newTitle;
