@@ -1,5 +1,5 @@
-import * as storage from './storageHandlers';
-import * as htmlHandler from './htmlHandlers';
+import * as storage from './storageHandlers.js';
+import * as htmlHandler from './htmlHandlers.js';
 
 export const init = () => {
   const addProjectButton = document.querySelector('.add-project');
@@ -44,7 +44,8 @@ const addMainEventHandlers = () => {
   const selectedProjectKey = selectedProject.dataset.key;
 
   const deleteProjectButton = document.querySelector('.project-title button.delete');
-  console.log(deleteProjectButton);
+  // DELETE
+  // console.log(deleteProjectButton);
 
   deleteProjectButton.addEventListener('click', () => handleDeleteProject(selectedProjectKey));
   addChecklistItemDeleteHandler();
@@ -52,25 +53,35 @@ const addMainEventHandlers = () => {
 
 const handleDeleteProject = (indx) => {
   const project = storage.getProjectList()[indx];
-  console.log(project);
+  // DELETE
+  // console.log(project);
 };
 
-const addChecklistItemDeleteHandler = () => {
-  const checklistItemDeleteButtonList = document.querySelectorAll('.checklist-item button.delete');
+const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {
+  const checklistItemDeleteButtonList = document.querySelectorAll(query);
   for (const checklistItemDeleteButton of checklistItemDeleteButtonList) {
     checklistItemDeleteButton.addEventListener('click', () => handleDeleteChecklistItem(checklistItemDeleteButton));
   }
 };
 
 const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
+  // get HTML elements with data keys
   const checklistItemElem = checklistItemDeleteButton.closest('.checklist-item');
   const todoElem = checklistItemElem.closest('.todo');
   const selectedProject = document.querySelector('button.selected');
-  console.log(checklistItemElem);
-  console.log(todoElem);
-  console.log(selectedProject);
 
-  htmlHandler.clearChecklist(todoElem.dataset.key);
-  const checklist = storage.getChecklist(selectedProject.dataset.key, todoElem.dataset.key);
-  console.log(checklist);
+  // store keys in variables
+  const checklistItemKey = checklistItemElem.dataset.key;
+  const todoKey = todoElem.dataset.key;
+  const selectedProjectKey = selectedProject.dataset.key;
+
+  // update backend
+  storage.removeChecklistItem(selectedProjectKey, todoKey, checklistItemKey);
+
+  // update frontend with updated backend
+  const checklist = storage.getChecklist(selectedProjectKey, todoKey);
+  htmlHandler.UpdateChecklist(todoKey, checklist);
+
+  const query = `.todo[data-key="${todoElem.dataset.key}"] > .checklist button.delete`;
+  addChecklistItemDeleteHandler(query);
 };

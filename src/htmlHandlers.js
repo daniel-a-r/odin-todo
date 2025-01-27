@@ -296,19 +296,29 @@ const createAddTodoButton = () => {
   return button;
 };
 
+const clearElem = (elem) => {
+  while (elem.hasChildNodes()) {
+    elem.removeChild(elem.lastChild);
+  }
+}
+
 export const clearMain = () => {
   const main = document.querySelector('main');
-
-  while (main.hasChildNodes()) {
-    main.removeChild(main.lastChild);
-  };
+  clearElem(main);
 };
 
-export const clearChecklist = (todoKey) => {
+// NOTE: function not needed
+// const clearChecklist = (todoKey) => {
+//   const checklistElem = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
+//   clearElem(checklistElem);
+// };
+
+export const UpdateChecklist = (todoKey, checklist) => {
   const checklistElem = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
-  console.log(checklistElem);
+  clearElem(checklistElem);
+
+  checklist.forEach((checklistItem, indx) => {
+    const checklistItemDiv = createChecklistItem(checklistItem, indx);
+    checklistElem.appendChild(checklistItemDiv);
+  });
 };
-
-// export const constUpdateChecklist = (checklist) => {
-
-// }

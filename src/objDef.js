@@ -17,8 +17,6 @@ export class Todo {
   }
   
   pushToChecklist(checklistItemObj) { this.checklist.push(checklistItemObj); }
-
-  removeAtIndex(i) { this.checklist.splice(i, 1); }
 }
 
 export class ChecklistItem {

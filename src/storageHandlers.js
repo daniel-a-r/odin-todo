@@ -146,11 +146,14 @@ export const removeProject = (i) => {
 };
 
 export const removeTodo = (i, j) => { 
-  projectList[i].removeAtIndex(j);
+  // projectList[i].removeAtIndex(j);
+  const projObj = projectList[i];
+  projObj.todoList.splice(j, 1);
   updateLocalStorage();
 };
 
 export const removeChecklistItem = (i, j, k) => { 
-  projectList[i].todoList[j].removeAtIndex(k);
+  const todoObj = projectList[i].todoList[j];
+  todoObj.checklist.splice(k, 1);
   updateLocalStorage();
 };
