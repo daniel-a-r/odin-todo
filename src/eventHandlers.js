@@ -75,10 +75,10 @@ const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
   const todoKey = todoElem.dataset.key;
   const selectedProjectKey = selectedProject.dataset.key;
 
-  // update backend
+  // update local storage
   storage.removeChecklistItem(selectedProjectKey, todoKey, checklistItemKey);
 
-  // update frontend with updated backend
+  // update frontend with updated local storage
   const checklist = storage.getChecklist(selectedProjectKey, todoKey);
   htmlHandler.UpdateChecklist(todoKey, checklist);
 
