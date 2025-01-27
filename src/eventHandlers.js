@@ -82,6 +82,7 @@ const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
   const checklist = storage.getChecklist(selectedProjectKey, todoKey);
   htmlHandler.UpdateChecklist(todoKey, checklist);
 
+  // re-add event handlers to delete buttons for checklist items
   const query = `.todo[data-key="${todoElem.dataset.key}"] > .checklist button.delete`;
   addChecklistItemDeleteHandler(query);
 };
