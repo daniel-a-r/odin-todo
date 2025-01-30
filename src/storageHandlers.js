@@ -58,7 +58,17 @@ export const init = () => {
   } else {
     projectList = JSON.parse(localStorage.getItem('projects'));
   }
+
+  if (!sessionStorage.getItem('selectedProject')) {
+    sessionStorage.setItem('selectedProject', JSON.stringify(null));
+  }
 };
+
+export const setSelectedProject = (indx) => sessionStorage.setItem('selectedProject', JSON.stringify(indx));
+
+export const getSelectedProject = () => JSON.parse(sessionStorage.getItem('selectedProject'));
+
+export const deleteSelectedProject = () => sessionStorage.setItem('selectedProject', JSON.stringify(null));
 
 const updateLocalStorage = () => {
   localStorage.setItem('projects', JSON.stringify(projectList));

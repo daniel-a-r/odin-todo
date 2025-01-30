@@ -5,6 +5,7 @@ export const init = () => {
   const addProjectButton = document.querySelector('.add-project');
   addProjectButton.addEventListener('click', () => handleAddProject());
   addProjectListSelectEvent();
+  addMainEventHandlers();
 };
 
 const addProjectListSelectEvent = () => {
@@ -36,6 +37,7 @@ const handleProjectSelect = (newSelectedButton) => {
 
   const project = storage.getProject(newSelectedButton.dataset.key);
   htmlHandler.createProjectSection(project);
+  storage.setSelectedProject(newSelectedButton.dataset.key);
   addMainEventHandlers();
 };
 
@@ -144,6 +146,7 @@ const addProjectDeleteHandler = () => {
 const handleDeleteProject = (projectIndx) => {
   // update local storage
   storage.removeProject(projectIndx);
+  storage.deleteSelectedProject();
 
   // update frontend
   htmlHandler.deleteProject(storage.getProjectTitles());

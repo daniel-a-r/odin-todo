@@ -1,7 +1,13 @@
-export const init = (projectTitleList) => {
+export const init = (projectTitleList, indx=null, projObj=null) => {
   const projectsContainer = document.querySelector('.projects-container');
   const projectButtons = createProjectButtonList(projectTitleList);
   projectsContainer.append(...projectButtons);
+
+  if (indx) {
+    const selectedProject = projectsContainer.children[indx]
+    selectedProject.classList.add('selected');
+    createProjectSection(projObj);
+  }
 };
 
 const createSVG = (pathDrawn) => {
