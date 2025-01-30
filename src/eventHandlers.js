@@ -43,13 +43,22 @@ const addMainEventHandlers = () => {
   addProjectDeleteHandler();
   addChecklistItemDeleteHandler();
   addTodoDeleteHandler();
+  addChecklistItemEditHandler();
+};
+
+const addButtonListHandler = (query, handler) => {
+  const buttonList = document.querySelectorAll(query);
+  for (const button of buttonList) {
+    button.addEventListener('click', () => handler(button));
+  }
 };
 
 const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {
-  const checklistItemDeleteButtonList = document.querySelectorAll(query);
-  for (const checklistItemDeleteButton of checklistItemDeleteButtonList) {
-    checklistItemDeleteButton.addEventListener('click', () => handleDeleteChecklistItem(checklistItemDeleteButton));
-  }
+  addButtonListHandler(query, handleDeleteChecklistItem);
+};
+
+const addChecklistItemEditHandler = (query='.checklist-item button.edit') => {
+  addButtonListHandler(query, handleEditChecklistItem);
 };
 
 const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
@@ -75,11 +84,12 @@ const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
   addChecklistItemDeleteHandler(query);
 };
 
+const handleEditChecklistItem = (checklistItemEditButton) => {
+  console.log(checklistItemEditButton);
+}
+
 const addTodoDeleteHandler = (query='.todo-title button.delete') => {
-  const todoDeleteButtonList = document.querySelectorAll(query);
-  for (const todoDeleteButton of todoDeleteButtonList) {
-    todoDeleteButton.addEventListener('click', () => handleDeleteTodo(todoDeleteButton));
-  }
+  addButtonListHandler(query, handleDeleteTodo);
 };
 
 const handleDeleteTodo = (todoDeleteButton) => {
