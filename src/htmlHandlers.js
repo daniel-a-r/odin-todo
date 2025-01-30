@@ -211,29 +211,33 @@ const createChecklist = (todoChecklist) => {
   return checklistDiv;
 };
 
-const createChecklistItem = (checklistItem, indx) => {
+const createChecklistItem = (checklistItemObj, indx) => {
   const checklistItemDiv = document.createElement('div');
   checklistItemDiv.classList.add('checklist-item');
   checklistItemDiv.dataset.key = indx;
 
-  const checkbox = createCheckbox(checklistItem.isDone);
-  const text = createChecklistItemText(checklistItem.text);
+  appendChecklistItemComponents(checklistItemDiv, checklistItemObj);
+
+  return checklistItemDiv;
+};
+
+const appendChecklistItemComponents = (checklistItemDiv, checklistItemObj) => {
+  const checkbox = createCheckbox(checklistItemObj.isDone);
+  const text = createChecklistItemText(checklistItemObj.text);
   const dropdown = createDropdown();
 
   checklistItemDiv.append(checkbox, text);
 
-  if (checklistItem.dueDate) {
-    const dueDate = createDueDateTag(checklistItem.dueDate);
+  if (checklistItemObj.dueDate) {
+    const dueDate = createDueDateTag(checklistItemObj.dueDate);
     checklistItemDiv.appendChild(dueDate);
   }
-  if (checklistItem.priority) {
-    const priority = createPriorityTag(checklistItem.priority);
+  if (checklistItemObj.priority) {
+    const priority = createPriorityTag(checklistItemObj.priority);
     checklistItemDiv.appendChild(priority);
   }
 
   checklistItemDiv.appendChild(dropdown);
-
-  return checklistItemDiv;
 };
 
 const createCheckbox = (isDone) => {
@@ -312,12 +316,6 @@ const clearProjectsContainer = () => {
   clearElem(projectsContainer);
 };
 
-// NOTE: function not needed
-// const clearChecklist = (todoKey) => {
-//   const checklistElem = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
-//   clearElem(checklistElem);
-// };
-
 export const UpdateChecklist = (todoKey, checklist) => {
   const checklistElem = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
   clearElem(checklistElem);
@@ -337,4 +335,9 @@ export const deleteProject = (projectTitleList) => {
   clearMain();
   clearProjectsContainer();
   init(projectTitleList);
+};
+
+export const updateChecklistItem = (checklistItemDiv, checklistItemObj) => {
+  clearElem(checklistItemDiv);
+  appendChecklistItemComponents(checklistItemDiv, checklistItemObj);
 };

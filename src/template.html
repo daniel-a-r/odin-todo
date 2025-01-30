@@ -26,11 +26,11 @@
     <form method="dialog">
       <div>
         <label for="project-title">Title:</label>
-        <input type="text" id="project-title" required>
+        <input type="text" id="project-title" name="title" required>
       </div>
       <div>
         <label for="project-desc">Description:</label>
-        <input type="textarea" id="project-desc">
+        <input type="textarea" id="project-desc" name="desc">
       </div>
       <div class="modal-buttons">
         <button class="close-modal" type="reset">Cancel</button>
@@ -43,7 +43,7 @@
     <form method="dialog">
       <div>
         <label for="todo-title">Title:</label>
-        <input type="text" id="todo-title" required>
+        <input type="text" id="todo-title" name="title" required>
       </div>
       <div class="modal-buttons">
         <button class="close-modal" type="reset">Cancel</button>
@@ -53,18 +53,18 @@
   </dialog>
 
   <dialog class="edit-checklist-item">
-    <form>
+    <form method="dialog">
       <div>
         <label for="checklist-item-title">Todo:</label>
-        <input type="text" id="checklist-item-title" required>
+        <input type="text" id="checklist-item-title" name="title" required>
       </div>
       <div>
         <label for="due-date">Due Date:</label>
-        <input type="date" id="due-date">
+        <input type="date" id="due-date" name="due-date">
       </div>
       <div>
         <label for="priority-select">Priority</label>
-        <select id="priority-select">
+        <select id="priority-select" name="priority">
           <option value="" selected></option>
           <option value="low">Low</option>
           <option value="important">Important</option>

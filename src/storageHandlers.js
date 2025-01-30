@@ -121,17 +121,17 @@ const updateChecklistItem = (i, j, k, prop, newValue) => {
 
 export const updateChecklistItemText = (i, j, k, newText) => { 
   updateChecklistItem(i, j, k, 'text', newText);
-  updateLocalStorage();
+  // updateLocalStorage();
 };
 
 export const updateChecklistItemDueDate = (i, j, k, newDueDate) => { 
   updateChecklistItem(i, j, k, 'dueDate', newDueDate);
-  updateLocalStorage();
+  // updateLocalStorage();
 };
 
 export const updateChecklistItemPriority = (i, j, k, newPriority) => {
   updateChecklistItem(i, j, k, 'priority', newPriority);
-  updateLocalStorage();
+  // updateLocalStorage();
 };
 
 export const updateChecklistItemIsDone = (i, j, k) => {
