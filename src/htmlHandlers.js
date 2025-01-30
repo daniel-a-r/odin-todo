@@ -307,6 +307,11 @@ export const clearMain = () => {
   clearElem(main);
 };
 
+const clearProjectsContainer = () => {
+  const projectsContainer = document.querySelector('.projects-container');
+  clearElem(projectsContainer);
+};
+
 // NOTE: function not needed
 // const clearChecklist = (todoKey) => {
 //   const checklistElem = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
@@ -326,4 +331,10 @@ export const UpdateChecklist = (todoKey, checklist) => {
 export const updateMain = (project) => {
   clearMain();
   createProjectSection(project);
+};
+
+export const deleteProject = (projectTitleList) => {
+  clearMain();
+  clearProjectsContainer();
+  init(projectTitleList);
 };

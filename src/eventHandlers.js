@@ -44,16 +44,11 @@ const addMainEventHandlers = () => {
   const selectedProjectKey = selectedProject.dataset.key;
 
   const deleteProjectButton = document.querySelector('.project-title button.delete');
-  // DELETE
-  // console.log(deleteProjectButton);
 
   deleteProjectButton.addEventListener('click', () => handleDeleteProject(selectedProjectKey));
   addChecklistItemDeleteHandler();
   addTodoDeleteHandler();
-};
-
-const handleDeleteProject = (indx) => {
-  const project = storage.getProjectList()[indx];
+  // addProjectDeleteHandler();
 };
 
 const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {
@@ -111,4 +106,15 @@ const handleDeleteTodo = (todoDeleteButton) => {
 
   // re-add event handlers
   addMainEventHandlers();
+};
+
+const handleDeleteProject = (projIndx) => {
+  // update local storage
+  storage.removeProject(projIndx);
+
+  // update frontend
+  htmlHandler.deleteProject(storage.getProjectTitles());
+
+  // re-add project event listeners
+  addProjectListSelectEvent();
 };
