@@ -1,3 +1,6 @@
+import { format } from "date-fns";
+import { da } from "date-fns/locale";
+
 export const init = (projectTitleList, indx=null, projObj=null) => {
   const projectsContainer = document.querySelector('.projects-container');
   const projectButtons = createProjectButtonList(projectTitleList);
@@ -260,10 +263,30 @@ const createChecklistItemText = (text) => {
   return para;
 };
 
-// TODO: figure out how dates work with date picker
 const createDueDateTag = (dueDate) => {
+  // format date
+  let dateList = dueDate.split('-');
+  dateList = dateList.map(e => Number(e));
+  dateList[1] = dateList[1] - 1;
+  const date = new Date(dateList[0], dateList[1], dateList[2]);
+  const currentYear = new Date().getFullYear();
+
+  let formattedDate;
+
+  if (currentYear === dateList[0]) {
+    formattedDate = format(date, 'MMM d');
+  } else {
+    formattedDate = format(date, 'MMM d, y');
+  }
+
+  // create elements
   const dueDateTag = document.createElement('div')
-  dueDate.classList.add('due-date');
+  dueDateTag.classList.add('due-date');
+
+  const para = document.createElement('p');
+  para.textContent = formattedDate;
+
+  dueDateTag.appendChild(para);
 
   return dueDateTag;
 };

@@ -1,11 +1,16 @@
 import * as storage from './storageHandlers.js';
 import * as htmlHandler from './htmlHandlers.js';
+import { format } from 'date-fns';
 
 export const init = () => {
   const addProjectButton = document.querySelector('.add-project');
   addProjectButton.addEventListener('click', () => handleAddProject());
   addProjectListSelectEvent();
-  addMainEventHandlers();
+
+  const selectedProject = document.querySelector('.selected');
+  if (selectedProject) {
+    addMainEventHandlers();
+  }
 };
 
 const addProjectListSelectEvent = () => {
@@ -76,6 +81,12 @@ const handleEditChecklistItem = (checklistItemEditButton) => {
   const currentText = checklistItemObj.text;
   const textInputElem = document.querySelector('#checklist-item-title');
   textInputElem.value = currentText;
+
+  const currentDueDate = checklistItemObj.dueDate;
+  if (currentDueDate) {
+    const dateElem = document.querySelector('#due-date');
+    dateElem.value = currentDueDate;
+  }
 
   const currentPriority = checklistItemObj.priority;
   if (currentPriority) {
@@ -177,22 +188,13 @@ const handleEditChecklistItemSubmit = (form) => {
   const title = data.get('title');
   const dueDate = (data.get('due-date')) ? data.get('due-date') : null;
   const priority = (data.get('priority')) ? data.get('priority') : null;
-  
-  if (dueDate) {
-    console.log(dueDate);
-    let dateList = dueDate.split('-');
-    dateList = dateList.map((e) => Number(e));
-    dateList[1] = --dateList[1];
-    console.log(dateList);
-    const date = new Date(dateList[0], dateList[1], dateList[2]);
-    console.log(date);
-  }
 
   const editingChecklistItem = document.querySelector('.editing');
   const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(editingChecklistItem);
 
   storage.updateChecklistItemText(selectedProjectKey, todoKey, checklistItemKey, title);
   storage.updateChecklistItemPriority(selectedProjectKey, todoKey, checklistItemKey, priority);
+  storage.updateChecklistItemDueDate(selectedProjectKey, todoKey, checklistItemKey, dueDate);
 
   const checklistItemObj = storage.getChecklistItem(selectedProjectKey, todoKey, checklistItemKey);
   htmlHandler.updateChecklistItem(editingChecklistItem, checklistItemObj);
