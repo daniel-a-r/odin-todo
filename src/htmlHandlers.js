@@ -322,3 +322,8 @@ export const UpdateChecklist = (todoKey, checklist) => {
     checklistElem.appendChild(checklistItemDiv);
   });
 };
+
+export const updateMain = (project) => {
+  clearMain();
+  createProjectSection(project);
+};

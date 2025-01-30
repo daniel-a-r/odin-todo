@@ -49,12 +49,11 @@ const addMainEventHandlers = () => {
 
   deleteProjectButton.addEventListener('click', () => handleDeleteProject(selectedProjectKey));
   addChecklistItemDeleteHandler();
+  addTodoDeleteHandler();
 };
 
 const handleDeleteProject = (indx) => {
   const project = storage.getProjectList()[indx];
-  // DELETE
-  // console.log(project);
 };
 
 const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {
@@ -85,4 +84,31 @@ const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
   // re-add event handlers to delete buttons for checklist items
   const query = `.todo[data-key="${todoElem.dataset.key}"] > .checklist button.delete`;
   addChecklistItemDeleteHandler(query);
+};
+
+const addTodoDeleteHandler = (query='.todo-title button.delete') => {
+  const todoDeleteButtonList = document.querySelectorAll(query);
+  for (const todoDeleteButton of todoDeleteButtonList) {
+    todoDeleteButton.addEventListener('click', () => handleDeleteTodo(todoDeleteButton));
+  }
+};
+
+const handleDeleteTodo = (todoDeleteButton) => {
+  // gwet HTML elements with data keys
+  const todoElem = todoDeleteButton.closest('.todo');
+  const selectedProject = document.querySelector('button.selected');
+
+  // store keys in variables
+  const todoKey = todoElem.dataset.key;
+  const selectedProjectKey = selectedProject.dataset.key;
+  const projectObj = storage.getProject(selectedProjectKey);
+
+  // update local storage
+  storage.removeTodo(selectedProjectKey, todoKey);
+
+  // update frontend
+  htmlHandler.updateMain(projectObj);
+
+  // re-add event handlers
+  addMainEventHandlers();
 };
