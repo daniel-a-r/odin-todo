@@ -44,6 +44,7 @@ const addMainEventHandlers = () => {
   addChecklistItemDeleteHandler();
   addTodoDeleteHandler();
   addChecklistItemEditHandler();
+  addCloseModalHandler();
 };
 
 const addButtonListHandler = (query, handler) => {
@@ -59,6 +60,25 @@ const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') =>
 
 const addChecklistItemEditHandler = (query='.checklist-item button.edit') => {
   addButtonListHandler(query, handleEditChecklistItem);
+};
+
+const handleEditChecklistItem = (checklistItemEditButton) => {
+  const checklistItem = checklistItemEditButton.closest('.checklist-item');
+  checklistItem.classList.add('editing');
+
+  const currentTitle = document.querySelector('.editing p').textContent;
+  const textInputElem = document.querySelector('#checklist-item-title');
+  textInputElem.value = currentTitle;
+
+  const currentPriority = document.querySelector('.editing .priority');
+  const selectElem = document.querySelector('#priority-select');
+  
+  if (currentPriority) {
+    selectElem.value = currentPriority.classList[1];
+  }
+
+  const editChecklistItemModal = document.querySelector('dialog.edit-checklist-item');
+  editChecklistItemModal.showModal();
 };
 
 const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
@@ -83,10 +103,6 @@ const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
   const query = `.todo[data-key="${todoElem.dataset.key}"] > .checklist button.delete`;
   addChecklistItemDeleteHandler(query);
 };
-
-const handleEditChecklistItem = (checklistItemEditButton) => {
-  console.log(checklistItemEditButton);
-}
 
 const addTodoDeleteHandler = (query='.todo-title button.delete') => {
   addButtonListHandler(query, handleDeleteTodo);
@@ -130,4 +146,17 @@ const handleDeleteProject = (projectIndx) => {
 
   // re-add project event listeners
   addProjectListSelectEvent();
+};
+
+const addCloseModalHandler = () => {
+  const handleCloseModal = () => {
+    const modal = document.querySelector('dialog[open]');
+    const editingElem = document.querySelector('.editing');
+
+    editingElem.classList.remove('editing');
+    modal.close();
+  };
+
+  const query = 'button.close-modal';
+  addButtonListHandler(query, handleCloseModal);
 };
