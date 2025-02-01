@@ -47,13 +47,19 @@ const handleProjectSelect = (newSelectedButton) => {
 };
 
 const addMainEventHandlers = () => {
+  // delete handlers
   addProjectDeleteHandler();
   addChecklistItemDeleteHandler();
   addTodoDeleteHandler();
-  addEditChecklistItemHandler();
-  addCloseModalHandler();
-  addEditChecklistItemSubmitHandler();
+
+  // edit handlers
   addCheckboxHandler();
+  addEditChecklistItemHandler();
+  addEditChecklistItemSubmitHandler();
+  addEditTodoHandler();
+  addEditTodoSubmitHandler();
+
+  addCloseModalHandler();
 };
 
 const addButtonListHandler = (query, handler) => {
@@ -81,6 +87,47 @@ const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') =>
   addButtonListHandler(query, handleDeleteChecklistItem);
 };
 
+const addEditTodoHandler = () => {
+  const query = '.todo-title button.edit';
+  addButtonListHandler(query, handleEditTodo);
+};
+
+const handleEditTodo = (todoEditButton) => {
+  const todoElem = todoEditButton.closest('.todo')
+  todoElem.classList.add('editing');
+
+  const todoKey = todoElem.dataset.key;
+  const selectedProjectKey = getSelectedProjectKey();
+
+  const todoObj = storage.getTodo(selectedProjectKey, todoKey);
+
+  const textInputElem = document.querySelector('#todo-title');
+  textInputElem.value = todoObj.title;
+
+  const editTodoModal = document.querySelector('dialog.edit-todo');
+  editTodoModal.showModal();
+};
+
+const addEditTodoSubmitHandler = () => {
+  const handleEditTodoSubmit = (form) => {
+    const data = new FormData(form);
+    const title = data.get('title');
+
+    const editingTodo = document.querySelector('.editing');
+    const todoKey = editingTodo.dataset.key;
+    const selectedProjectKey = getSelectedProjectKey();
+
+    storage.updateTodoTitle(selectedProjectKey, todoKey, title);
+    htmlHandler.updateTodoTitle(storage.getTodo(selectedProjectKey, todoKey), todoKey);
+
+    form.reset();
+    removeEditingClass();
+  };
+
+  const form = document.querySelector('.edit-todo form');
+  form.addEventListener('submit', () => handleEditTodoSubmit(form));
+};
+
 const addEditChecklistItemHandler = (query='.checklist-item button.edit') => {
   addButtonListHandler(query, handleEditChecklistItem);
 };
@@ -93,9 +140,8 @@ const handleEditChecklistItem = (checklistItemEditButton) => {
 
   const checklistItemObj = storage.getChecklistItem(selectedProjectKey, todoKey, checklistItemKey);
 
-  const currentText = checklistItemObj.text;
   const textInputElem = document.querySelector('#checklist-item-title');
-  textInputElem.value = currentText;
+  textInputElem.value = checklistItemObj.text;
 
   const currentDueDate = checklistItemObj.dueDate;
   if (currentDueDate) {
@@ -224,15 +270,25 @@ const getAllKeys = (elem) => {
   // get HTML elements with data keys
   const checklistItemElem = elem.closest('.checklist-item');
   const todoElem = checklistItemElem.closest('.todo');
-  const selectedProject = document.querySelector('button.selected');
+  const selectedProjectElem = document.querySelector('button.selected');
 
   // store keys in variables
   const checklistItemKey = checklistItemElem.dataset.key;
   const todoKey = todoElem.dataset.key;
-  const selectedProjectKey = selectedProject.dataset.key;
+  const selectedProjectKey = selectedProjectElem.dataset.key;
 
   return { selectedProjectKey, todoKey, checklistItemKey };
 }
+
+const getTodoKey = (elem) => {
+  const todoElem = elem.closest('.todo');
+  return todoElem.dataset.key;
+};
+
+const getSelectedProjectKey = () => {
+  const selectedProject = document.querySelector('button.selected');
+  return selectedProject.dataset.key;
+};
 
 const removeEditingClass = () => {
   const editingElem = document.querySelector('.editing');

@@ -373,3 +373,8 @@ export const updateChecklistItem = (checklistItemDiv, checklistItemObj) => {
   clearElem(checklistItemDiv);
   appendChecklistItemComponents(checklistItemDiv, checklistItemObj);
 };
+
+export const updateTodoTitle = (todoObj, todoKey) => {
+  const todoTitleElem = document.querySelector(`.todo[data-key="${todoKey}"] > .todo-title > h3`);
+  todoTitleElem.textContent = todoObj.title;
+};
