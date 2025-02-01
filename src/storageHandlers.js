@@ -147,6 +147,7 @@ export const updateChecklistItemPriority = (i, j, k, newPriority) => {
 export const updateChecklistItemIsDone = (i, j, k) => {
   const checklistItem = projectList[i].todoList[j].checklist[k];
   checklistItem.isDone = (checklistItem.isDone) ? false : true;
+  // updateChecklistItem(i, j, k, 'isDone', isDone);
   updateLocalStorage();
 };
 

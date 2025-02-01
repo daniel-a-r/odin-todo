@@ -1,6 +1,6 @@
 import * as storage from './storageHandlers.js';
 import * as htmlHandler from './htmlHandlers.js';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 
 export const init = () => {
   const addProjectButton = document.querySelector('.add-project');
@@ -53,6 +53,7 @@ const addMainEventHandlers = () => {
   addEditChecklistItemHandler();
   addCloseModalHandler();
   addEditChecklistItemSubmitHandler();
+  addCheckboxHandler();
 };
 
 const addButtonListHandler = (query, handler) => {
@@ -60,6 +61,20 @@ const addButtonListHandler = (query, handler) => {
   for (const button of buttonList) {
     button.addEventListener('click', () => handler(button));
   }
+};
+
+const addCheckboxHandler = () => {
+  const query='input[type="checkbox"]';
+  const checkboxList = document.querySelectorAll(query);
+  for (const checkbox of checkboxList) {
+    checkbox.addEventListener('change', () => handleCheckboxChange(checkbox));
+  }
+};
+
+const handleCheckboxChange = (checkbox) => {
+  const checklistItem = checkbox.closest('.checklist-item');
+  const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItem);
+  storage.updateChecklistItemIsDone(selectedProjectKey, todoKey, checklistItemKey);
 };
 
 const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {

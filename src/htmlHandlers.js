@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import { da } from "date-fns/locale";
 
 export const init = (projectTitleList, indx=null, projObj=null) => {
   const projectsContainer = document.querySelector('.projects-container');
@@ -252,6 +251,10 @@ const appendChecklistItemComponents = (checklistItemDiv, checklistItemObj) => {
 const createCheckbox = (isDone) => {
   const checkbox = document.createElement('input');
   checkbox.setAttribute('type', 'checkbox');
+
+  if (isDone) {
+    checkbox.checked = true;
+  }
 
   return checkbox;
 };
