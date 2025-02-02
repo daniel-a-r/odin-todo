@@ -76,8 +76,12 @@ aside {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: max-content;
+  width: auto;
   padding: 0.3rem;
+}
+
+.button-container svg {
+  flex-shrink: 0;
 }
 
 .add-button {
@@ -92,6 +96,12 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .project {

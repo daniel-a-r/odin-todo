@@ -53,7 +53,7 @@ export const createProjectButton = (projectTitle, indx) => {
   button.classList.add('button-container', 'project');
   button.dataset.key = indx;
   const p = document.createElement('p');
-  p.classList.add('project-title');
+  // p.classList.add('project-title');
   p.textContent = projectTitle;
   button.append(createInbox(), p);
 
@@ -377,4 +377,19 @@ export const updateChecklistItem = (checklistItemDiv, checklistItemObj) => {
 export const updateTodoTitle = (todoObj, todoKey) => {
   const todoTitleElem = document.querySelector(`.todo[data-key="${todoKey}"] > .todo-title > h3`);
   todoTitleElem.textContent = todoObj.title;
+};
+
+export const updateSelectedProject = (projObj) => {
+  const selectedProject = document.querySelector('.selected p');
+  selectedProject.textContent = projObj.title;
+
+  updateProjectHeader(projObj);
+};
+
+const updateProjectHeader = (projObj) => {
+  const projTitle = document.querySelector('.project-title h1');
+  const projDesc = document.querySelector('.project-desc p');
+
+  projTitle.textContent = projObj.title;
+  projDesc.textContent = projObj.desc;
 };

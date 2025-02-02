@@ -58,6 +58,8 @@ const addMainEventHandlers = () => {
   addEditChecklistItemSubmitHandler();
   addEditTodoHandler();
   addEditTodoSubmitHandler();
+  addEditProjectHandler();
+  addEditProjectSubmitHandler();
 
   addCloseModalHandler();
 };
@@ -251,10 +253,38 @@ const addEditProjectHandler = () => {
   function handleEditProject() {
     const selectedProjectKey = getSelectedProjectKey();
     const projObj = storage.getProject(selectedProjectKey);
+
+    const textInputElem = document.querySelector('#project-title');
+    textInputElem.value = projObj.title;
+
+    const textareaElem = document.querySelector('#project-desc');
+    textareaElem.value = projObj.desc;
+
+    const editProjectModal = document.querySelector('dialog.edit-project');
+    editProjectModal.showModal();
   }
 
   const editProjectButton = document.querySelector('.project-title button.edit');
   editProjectButton.addEventListener('click', handleEditProject);
+};
+
+const addEditProjectSubmitHandler = () => {
+  function handleEditProjectSubmit() {
+    const data = new FormData(this);
+    const title = data.get('title');
+    const desc = data.get('desc');
+    const selectedProjectKey = getSelectedProjectKey();
+
+    storage.updateProjectTitle(selectedProjectKey, title);
+    storage.updateProjectDesc(selectedProjectKey, desc);
+    htmlHandler.updateSelectedProject(storage.getProject(selectedProjectKey));
+
+    form.reset();
+    removeEditingClass();
+  }
+
+  const form = document.querySelector('.edit-project form');
+  form.addEventListener('submit', handleEditProjectSubmit);
 }
 
 const addCloseModalHandler = () => {
@@ -270,7 +300,6 @@ const addCloseModalHandler = () => {
 };
 
 // helper functions
-
 const getAllKeys = (elem) => {
   // get HTML elements with data keys
   const checklistItemElem = elem.closest('.checklist-item');
@@ -297,5 +326,7 @@ const getSelectedProjectKey = () => {
 
 const removeEditingClass = () => {
   const editingElem = document.querySelector('.editing');
-  editingElem.classList.remove('editing');
+  if (editingElem) {
+    editingElem.classList.remove('editing');
+  }
 };
