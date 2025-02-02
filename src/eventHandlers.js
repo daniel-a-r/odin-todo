@@ -277,7 +277,7 @@ const addEditProjectSubmitHandler = () => {
   function handleEditProjectSubmit() {
     const data = new FormData(this);
     const title = data.get('title');
-    const desc = data.get('desc');
+    const desc = (data.get('desc')) ? data.get('desc') : null;
     const selectedProjectKey = getSelectedProjectKey();
 
     storage.updateProjectTitle(selectedProjectKey, title);
@@ -289,7 +289,7 @@ const addEditProjectSubmitHandler = () => {
 
   const form = document.querySelector('.edit-project form');
   form.addEventListener('submit', handleEditProjectSubmit);
-}
+};
 
 const addCloseModalHandler = () => {
   const handleCloseModal = () => {

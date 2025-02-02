@@ -76,10 +76,8 @@ const createProjectHeader = (projecTitle, projectDesc) => {
   const projectTitleElem = createProjectTitle(projecTitle);
   div.appendChild(projectTitleElem);
 
-  if (projectDesc) {
-    const projectDescElem = createprojectDesc(projectDesc);
-    div.appendChild(projectDescElem);
-  }
+  const projectDescElem = createprojectDesc(projectDesc);
+  div.appendChild(projectDescElem);
 
   return div;
 };
@@ -391,8 +389,5 @@ const updateProjectHeader = (projObj) => {
   const projDesc = document.querySelector('.project-desc p');
 
   projTitle.textContent = projObj.title;
-
-  if (projObj.desc) {
-    projDesc.textContent = projObj.desc;
-  }
+  projDesc.textContent = projObj.desc;
 };
