@@ -311,3 +311,47 @@ input[type="checkbox"] {
 .add-checklist-item {
   background-color: var(--hover-color);
 }
+
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+
+  h3 {
+    text-align: center;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.input-container {
+  display: grid;
+  grid-template-columns: max-content auto;
+  row-gap: 0.45rem;
+  column-gap: 0.35rem;
+}
+
+label {
+  grid-column: 1/2;
+  justify-self: end;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.modal-buttons button {
+  background-color: var(--selected-color);
+  padding: 0.25rem 0.65rem;
+
+  &:hover {
+    background-color: var(--hover-color);
+  }
+}
