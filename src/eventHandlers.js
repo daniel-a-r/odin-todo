@@ -140,14 +140,13 @@ const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') =>
 };
 
 // edit handlers
-const addCheckboxHandler = () => {
+const addCheckboxHandler = (query='input[type="checkbox"]') => {
   const handleCheckboxChange = (checkbox) => {
     const checklistItem = checkbox.closest('.checklist-item');
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItem);
     storage.updateChecklistItemIsDone(selectedProjectKey, todoKey, checklistItemKey);
   };
 
-  const query='input[type="checkbox"]';
   const checkboxList = document.querySelectorAll(query);
   for (const checkbox of checkboxList) {
     checkbox.addEventListener('change', () => handleCheckboxChange(checkbox));
@@ -204,6 +203,7 @@ const addEditChecklistItemSubmitHandler = () => {
   
     addEditChecklistItemHandler('.editing button.edit');
     addChecklistItemDeleteHandler('.editing button.delete');
+    addCheckboxHandler('.editing input[type="checkbox"]');
     
     form.reset();
     removeEditingClass();
