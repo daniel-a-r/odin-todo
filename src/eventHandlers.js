@@ -1,11 +1,28 @@
 import * as storage from './storageHandlers.js';
 import * as htmlHandler from './htmlHandlers.js';
-// import { format } from 'date-fns';
 
 export const init = () => {
+  function handleAddProject() {
+    const projContainer = document.querySelector('.projects-container');
+    storage.createProject('New Project');
+    const projTitle = storage.getLastProjectTitle();
+    const lastIndx = storage.getLastProjectIndex();
+    const projectButton = htmlHandler.createProjectButton(projTitle, lastIndx);
+    projectButton.addEventListener('click', handleProjectSelect);
+    projContainer.appendChild(projectButton);
+  };
+
   const addProjectButton = document.querySelector('.add-project');
-  addProjectButton.addEventListener('click', () => handleAddProject());
+  addProjectButton.addEventListener('click', handleAddProject);
   addProjectListSelectEvent();
+  
+  // form submit handlers
+  addEditProjectSubmitHandler();
+  addEditTodoSubmitHandler();
+  addEditChecklistItemSubmitHandler();
+
+  // add close modal event handlers
+  addCloseModalHandler();
 
   const selectedProject = document.querySelector('.selected');
   if (selectedProject) {
@@ -16,33 +33,24 @@ export const init = () => {
 const addProjectListSelectEvent = () => {
   const projectList = document.querySelector('.projects-container');
   for (const project of projectList.children) {
-    project.addEventListener('click', () => handleProjectSelect(project));
+    project.addEventListener('click', handleProjectSelect);
   }
 };
 
-const handleAddProject = () => {
-  const projContainer = document.querySelector('.projects-container');
-  storage.createProject('New Project');
-  const projTitle = storage.getLastProjectTitle();
-  const lastIndx = storage.getLastProjectIndex();
-  const projectButton = htmlHandler.createProjectButton(projTitle, lastIndx);
-  projectButton.addEventListener('click', () => handleProjectSelect(projectButton));
-  projContainer.appendChild(projectButton);
-};
-
-const handleProjectSelect = (newSelectedButton) => {
+function handleProjectSelect() {
   const prevSelectedButton = document.querySelector('.selected');
 
-  if (prevSelectedButton !== null) {
+  if (prevSelectedButton) {
     prevSelectedButton.classList.remove('selected');
   }
 
   htmlHandler.clearMain();
-  newSelectedButton.classList.add('selected');
+  this.classList.add('selected');
+  const newSelectedProjectKey = this.dataset.key;
 
-  const project = storage.getProject(newSelectedButton.dataset.key);
+  const project = storage.getProject(newSelectedProjectKey);
   htmlHandler.createProjectSection(project);
-  storage.setSelectedProject(newSelectedButton.dataset.key);
+  storage.setSelectedProject(newSelectedProjectKey);
   addMainEventHandlers();
 };
 
@@ -55,13 +63,8 @@ const addMainEventHandlers = () => {
   // edit handlers
   addCheckboxHandler();
   addEditChecklistItemHandler();
-  addEditChecklistItemSubmitHandler();
   addEditTodoHandler();
-  addEditTodoSubmitHandler();
-  addEditProjectHandler();
-  addEditProjectSubmitHandler();
-
-  addCloseModalHandler();
+  addEditProjectHandler();  
 };
 
 const addButtonListHandler = (query, handler) => {
@@ -73,9 +76,12 @@ const addButtonListHandler = (query, handler) => {
 
 // delete handlers
 const addProjectDeleteHandler = () => {
-  const handleDeleteProject = (projectIndx) => {
+  function handleDeleteProject() {
+    // get selected project key 
+    const selectedProjectKey = getSelectedProjectKey();
+    
     // update local storage
-    storage.removeProject(projectIndx);
+    storage.removeProject(selectedProjectKey);
     storage.deleteSelectedProject();
   
     // update frontend
@@ -85,15 +91,13 @@ const addProjectDeleteHandler = () => {
     addProjectListSelectEvent();
   };
 
-  const selectedProjectKey = getSelectedProjectKey();
   const deleteProjectButton = document.querySelector('.project-title button.delete');
-
-  deleteProjectButton.addEventListener('click', () => handleDeleteProject(selectedProjectKey));
+  deleteProjectButton.addEventListener('click', handleDeleteProject);
 };
 
 const addTodoDeleteHandler = (query='.todo-title button.delete') => {
   const handleDeleteTodo = (todoDeleteButton) => {
-    // gwet HTML elements with data keys
+    // get HTML elements with data keys
     const todoElem = todoDeleteButton.closest('.todo');
     const selectedProject = document.querySelector('button.selected');
   
@@ -182,8 +186,8 @@ const addEditChecklistItemHandler = (query='.checklist-item button.edit') => {
 };
 
 const addEditChecklistItemSubmitHandler = () => {
-  const handleEditChecklistItemSubmit = (form) => {
-    const data = new FormData(form);
+  function handleEditChecklistItemSubmit() {
+    const data = new FormData(this);
     const title = data.get('title');
     const dueDate = (data.get('due-date')) ? data.get('due-date') : null;
     const priority = (data.get('priority')) ? data.get('priority') : null;
@@ -199,13 +203,14 @@ const addEditChecklistItemSubmitHandler = () => {
     htmlHandler.updateChecklistItem(editingChecklistItem, checklistItemObj);
   
     addEditChecklistItemHandler('.editing button.edit');
+    addChecklistItemDeleteHandler('.editing button.delete');
     
     form.reset();
     removeEditingClass();
   };
 
   const form = document.querySelector('.edit-checklist-item form');
-  form.addEventListener('submit', () => handleEditChecklistItemSubmit(form));
+  form.addEventListener('submit', handleEditChecklistItemSubmit);
 };
 
 const addEditTodoHandler = () => {
@@ -280,7 +285,6 @@ const addEditProjectSubmitHandler = () => {
     htmlHandler.updateSelectedProject(storage.getProject(selectedProjectKey));
 
     form.reset();
-    removeEditingClass();
   }
 
   const form = document.querySelector('.edit-project form');
@@ -314,10 +318,11 @@ const getAllKeys = (elem) => {
   return { selectedProjectKey, todoKey, checklistItemKey };
 };
 
-const getTodoKey = (elem) => {
-  const todoElem = elem.closest('.todo');
-  return todoElem.dataset.key;
-};
+// DELETE unnecessary function
+// const getTodoKey = (elem) => {
+//   const todoElem = elem.closest('.todo');
+//   return todoElem.dataset.key;
+// };
 
 const getSelectedProjectKey = () => {
   const selectedProject = document.querySelector('button.selected');

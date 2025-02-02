@@ -391,5 +391,8 @@ const updateProjectHeader = (projObj) => {
   const projDesc = document.querySelector('.project-desc p');
 
   projTitle.textContent = projObj.title;
-  projDesc.textContent = projObj.desc;
+
+  if (projObj.desc) {
+    projDesc.textContent = projObj.desc;
+  }
 };
