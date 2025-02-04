@@ -123,7 +123,7 @@ const addTodoDeleteHandler = (key=null) => {
   addButtonListHandler(query, handleDeleteTodo);
 };
 
-const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {
+const addChecklistItemDeleteHandler = (key=null) => {
   const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
     // get all keys
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItemDeleteButton);
@@ -133,12 +133,18 @@ const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') =>
   
     // update frontend with updated local storage
     const checklist = storage.getChecklist(selectedProjectKey, todoKey);
-    htmlHandler.UpdateChecklist(todoKey, checklist);
+    htmlHandler.updateChecklist(todoKey, checklist);
   
     // re-add event handlers to delete buttons for checklist items
-    const query = `.todo[data-key="${todoKey}"] > .checklist button.delete`;
-    addChecklistItemDeleteHandler(query);
+    addChecklistItemDeleteHandler(key);
   };
+
+  let query;
+  if (key) {
+    query = `.todo[data-key="${todoKey}"] > .checklist button.delete`
+  } else {
+    query = '.checklist-item button.delete';
+  }
 
   addButtonListHandler(query, handleDeleteChecklistItem);
 };

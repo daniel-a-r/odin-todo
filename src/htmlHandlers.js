@@ -360,7 +360,7 @@ const clearProjectsContainer = () => {
   clearElem(projectsContainer);
 };
 
-export const UpdateChecklist = (todoKey, checklist) => {
+export const updateChecklist = (todoKey, checklist) => {
   const checklistElem = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
   clearElem(checklistElem);
 
