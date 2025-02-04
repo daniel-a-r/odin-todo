@@ -82,13 +82,13 @@ export const createProject = (title, desc=null) => {
 
 export const createTodo = (i, title) => {
   const todo = new Todo(title);
-  projectList[i].pushTodoList(todo);
+  projectList[i].todoList.push(todo);
   updateLocalStorage();
 };
 
 export const createChecklistItem = (i, j, text, dueDate=null, priority=null) => {
   const checklistItem = new ChecklistItem(text, dueDate, priority);
-  projectList[i].todoList[j].pushToChecklist(checklistItem);
+  projectList[i].todoList[j].checklist.push(checklistItem);
   updateLocalStorage();
 };
 
@@ -104,6 +104,10 @@ export const getLastProjectIndex = () => projectList.length - 1;
 export const getProject = (index) => projectList.at(index);
 
 export const getTodo = (i, j) => projectList[i].todoList.at(j);
+
+export const getLastTodo = (i) => getTodo(i, -1);
+
+export const getLastTodoIndex = (i) => projectList[i].todoList.length - 1;
 
 export const getChecklist = (i, j) => projectList[i].todoList[j].checklist;
 

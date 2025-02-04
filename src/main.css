@@ -303,11 +303,11 @@ input[type="checkbox"] {
   }
 }
 
-.add-todo {
+ button.add-todo {
   align-self: center;
 }
 
-.add-todo,
+button.add-todo,
 .add-checklist-item {
   background-color: var(--hover-color);
 }

@@ -1,19 +1,8 @@
 import * as storage from './storageHandlers.js';
 import * as htmlHandler from './htmlHandlers.js';
+import { da } from 'date-fns/locale';
 
 export const init = () => {
-  function handleAddProject() {
-    const projContainer = document.querySelector('.projects-container');
-    storage.createProject('New Project');
-    const projTitle = storage.getLastProjectTitle();
-    const lastIndx = storage.getLastProjectIndex();
-    const projectButton = htmlHandler.createProjectButton(projTitle, lastIndx);
-    projectButton.addEventListener('click', handleProjectSelect);
-    projContainer.appendChild(projectButton);
-  };
-
-  const addProjectButton = document.querySelector('.add-project');
-  // addProjectButton.addEventListener('click', handleAddProject);
   addProjectListSelectEvent();
 
   addCreateProjectHandler();
@@ -23,6 +12,7 @@ export const init = () => {
   addEditTodoSubmitHandler();
   addEditChecklistItemSubmitHandler();
   addCreateProjectSubmitHandler()
+  addCreateTodoSubmitHandler();
 
   // add close modal event handlers
   addCloseModalHandler();
@@ -67,7 +57,10 @@ const addMainEventHandlers = () => {
   addCheckboxHandler();
   addEditChecklistItemHandler();
   addEditTodoHandler();
-  addEditProjectHandler();  
+  addEditProjectHandler();
+
+  // create handlers 
+  addCreateTodoHandler();
 };
 
 const addButtonListHandler = (query, handler) => {
@@ -98,7 +91,7 @@ const addProjectDeleteHandler = () => {
   deleteProjectButton.addEventListener('click', handleDeleteProject);
 };
 
-const addTodoDeleteHandler = (query='.todo-title button.delete') => {
+const addTodoDeleteHandler = (key=null) => {
   const handleDeleteTodo = (todoDeleteButton) => {
     // get HTML elements with data keys
     const todoElem = todoDeleteButton.closest('.todo');
@@ -118,6 +111,14 @@ const addTodoDeleteHandler = (query='.todo-title button.delete') => {
     // re-add event handlers
     addMainEventHandlers();
   };
+
+  let query;
+
+  if (key) {
+    query = `.todo[data-key="${key}"] > .todo-title button.delete`;
+  } else {
+    query = '.todo-title button.delete';
+  }
 
   addButtonListHandler(query, handleDeleteTodo);
 };
@@ -216,7 +217,7 @@ const addEditChecklistItemSubmitHandler = () => {
   form.addEventListener('submit', handleEditChecklistItemSubmit);
 };
 
-const addEditTodoHandler = () => {
+const addEditTodoHandler = (key=null) => {
   const handleEditTodo = (todoEditButton) => {
     const todoElem = todoEditButton.closest('.todo')
     todoElem.classList.add('editing');
@@ -233,7 +234,13 @@ const addEditTodoHandler = () => {
     editTodoModal.showModal();
   };
 
-  const query = '.todo-title button.edit';
+  let query;
+  if (key) {
+    query = `.todo[data-key="${key}"] > .todo-title button.edit`;
+  } else {
+    query = '.todo-title button.edit';
+  }
+
   addButtonListHandler(query, handleEditTodo);
 };
 
@@ -309,8 +316,8 @@ const addCloseModalHandler = () => {
 // create handlers 
 const addCreateProjectHandler = () => {
   function handleCreateProject() {
-    const projectModal = document.querySelector('dialog.add-project');
-    projectModal.showModal();
+    const addProjectModal = document.querySelector('dialog.add-project');
+    addProjectModal.showModal();
   }
 
   const createProjectButton = document.querySelector('button.add-project');
@@ -327,11 +334,40 @@ const addCreateProjectSubmitHandler = () => {
     const lastProj = storage.getLastProject();
     const projBtn = htmlHandler.appendProjectButton(lastProj.title, storage.getLastProjectIndex());
     projBtn.addEventListener('click', handleProjectSelect);
-    form.reset();
+    this.reset();
   }
 
   const form = document.querySelector('dialog.add-project form');
   form.addEventListener('submit', handleAddProjectSubmit);
+};
+
+const addCreateTodoHandler = () => {
+  function handleAddTodo() {
+    const addTodoModal = document.querySelector('dialog.add-todo');
+    addTodoModal.showModal();
+  }
+
+  const addTodoBtn = document.querySelector('button.add-todo');
+  addTodoBtn.addEventListener('click', handleAddTodo);
+};
+
+const addCreateTodoSubmitHandler = () => {
+  const handleAddTodoSubmit = () => {
+    const data = new FormData(form);
+    const title = data.get('title');
+
+    const selectedProjectKey = getSelectedProjectKey();
+    storage.createTodo(selectedProjectKey, title);
+    const lastTodo = storage.getLastTodo(selectedProjectKey);
+    const todoElem = htmlHandler.appendTodo(lastTodo, storage.getLastTodoIndex(selectedProjectKey));
+    addEditTodoHandler(todoElem.dataset.key);
+    addTodoDeleteHandler(todoElem.dataset.key);
+
+    form.reset();
+  };
+
+  const form = document.querySelector('dialog.add-todo form');
+  form.addEventListener('submit', handleAddTodoSubmit);
 };
 
 // helper functions
@@ -348,12 +384,6 @@ const getAllKeys = (elem) => {
 
   return { selectedProjectKey, todoKey, checklistItemKey };
 };
-
-// DELETE unnecessary function
-// const getTodoKey = (elem) => {
-//   const todoElem = elem.closest('.todo');
-//   return todoElem.dataset.key;
-// };
 
 const getSelectedProjectKey = () => {
   const selectedProject = document.querySelector('button.selected');

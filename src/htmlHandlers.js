@@ -198,6 +198,13 @@ const createTodo = (todo, indx) => {
   return todoElem;
 };
 
+export const appendTodo = (todo, indx) => {
+  const todoContainer = document.querySelector('.todo-container');
+  const todoElem = createTodo(todo, indx);
+  todoContainer.appendChild(todoElem);
+  return todoElem;
+}
+
 const createTodoTitle = (todoTitle) => {
   const todoTitleDiv = document.createElement('div');
   todoTitleDiv.classList.add('todo-title');
