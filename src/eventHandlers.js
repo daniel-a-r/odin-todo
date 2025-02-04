@@ -13,13 +13,16 @@ export const init = () => {
   };
 
   const addProjectButton = document.querySelector('.add-project');
-  addProjectButton.addEventListener('click', handleAddProject);
+  // addProjectButton.addEventListener('click', handleAddProject);
   addProjectListSelectEvent();
+
+  addCreateProjectHandler();
   
   // form submit handlers
   addEditProjectSubmitHandler();
   addEditTodoSubmitHandler();
   addEditChecklistItemSubmitHandler();
+  addCreateProjectSubmitHandler()
 
   // add close modal event handlers
   addCloseModalHandler();
@@ -265,8 +268,8 @@ const addEditProjectHandler = () => {
     const textareaElem = document.querySelector('#project-desc');
     textareaElem.value = projObj.desc;
 
-    const editProjectModal = document.querySelector('dialog.edit-project');
-    editProjectModal.showModal();
+    const projectModal = document.querySelector('dialog.edit-project');
+    projectModal.showModal();
   }
 
   const editProjectButton = document.querySelector('.project-title button.edit');
@@ -287,7 +290,7 @@ const addEditProjectSubmitHandler = () => {
     form.reset();
   }
 
-  const form = document.querySelector('.edit-project form');
+  const form = document.querySelector('dialog.edit-project form');
   form.addEventListener('submit', handleEditProjectSubmit);
 };
 
@@ -301,6 +304,34 @@ const addCloseModalHandler = () => {
 
   const query = 'button.close-modal';
   addButtonListHandler(query, handleCloseModal);
+};
+
+// create handlers 
+const addCreateProjectHandler = () => {
+  function handleCreateProject() {
+    const projectModal = document.querySelector('dialog.add-project');
+    projectModal.showModal();
+  }
+
+  const createProjectButton = document.querySelector('button.add-project');
+  createProjectButton.addEventListener('click', handleCreateProject);
+};
+
+const addCreateProjectSubmitHandler = () => {
+  function handleAddProjectSubmit() {
+    const data = new FormData(this);
+    const title = data.get('title');
+    const desc = (data.get('desc')) ? data.get('desc') : null;
+
+    storage.createProject(title, desc);
+    const lastProj = storage.getLastProject();
+    const projBtn = htmlHandler.appendProjectButton(lastProj.title, storage.getLastProjectIndex());
+    projBtn.addEventListener('click', handleProjectSelect);
+    form.reset();
+  }
+
+  const form = document.querySelector('dialog.add-project form');
+  form.addEventListener('submit', handleAddProjectSubmit);
 };
 
 // helper functions

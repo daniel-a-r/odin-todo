@@ -24,7 +24,25 @@
 
   <dialog class="edit-project">
     <div class="dialog-container">
-      <h3>Edit Project</h3>
+      <h3 class="title">Edit Project</h3>
+      <form method="dialog">
+        <div class="input-container">
+          <label for="project-title">Title:</label>
+          <div><input type="text" id="project-title" name="title" required></div>
+          <label for="project-desc">Description:</label>
+          <div><textarea name="desc" id="project-desc" rows="7" cols="40"></textarea></div>
+        </div>
+        <div class="modal-buttons">
+          <button class="close-modal" type="reset">Cancel</button>
+          <button class="submit" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="add-project">
+    <div class="dialog-container">
+      <h3 class="title">Add Project</h3>
       <form method="dialog">
         <div class="input-container">
           <label for="project-title">Title:</label>
@@ -42,7 +60,23 @@
 
   <dialog class="edit-todo">
     <div class="dialog-container">
-      <h3>Edit Todo</h3>
+      <h3 class="title">Edit Todo</h3>
+      <form method="dialog">
+        <div class="input-container">
+          <label for="todo-title">Title:</label>
+          <div><input type="text" id="todo-title" name="title" required></div>
+        </div>
+        <div class="modal-buttons">
+          <button class="close-modal" type="reset">Cancel</button>
+          <button class="submit" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="add-todo">
+    <div class="dialog-container">
+      <h3 class="title">Add Todo</h3>
       <form method="dialog">
         <div class="input-container">
           <label for="todo-title">Title:</label>
@@ -58,7 +92,34 @@
 
   <dialog class="edit-checklist-item">
     <div class="dialog-container">
-      <h3>Edit Checklist Item</h3>
+      <h3 class="title">Edit Checklist Item</h3>
+      <form method="dialog">
+        <div class="input-container">
+          <label for="checklist-item-title">Todo:</label>
+          <div><input type="text" id="checklist-item-title" name="title" required></div>
+          <label for="due-date">Due Date:</label>
+          <div><input type="date" id="due-date" name="due-date"></div>
+          <label for="priority-select">Priority:</label>
+          <div>
+            <select id="priority-select" name="priority">
+              <option value="" selected></option>
+              <option value="low">Low</option>
+              <option value="important">Important</option>
+              <option value="urgent">Urgent</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button class="close-modal" type="reset">Cancel</button>
+          <button class="submit" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="add-checklist-item">
+    <div class="dialog-container">
+      <h3 class="title">Add Checklist Item</h3>
       <form method="dialog">
         <div class="input-container">
           <label for="checklist-item-title">Todo:</label>

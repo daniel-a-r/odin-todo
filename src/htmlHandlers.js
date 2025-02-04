@@ -60,6 +60,13 @@ export const createProjectButton = (projectTitle, indx) => {
   return button;
 };
 
+export const appendProjectButton = (projectTitle, indx) => {
+  const projectButton = createProjectButton(projectTitle, indx);
+  const projectsContainer = document.querySelector('.projects-container');
+  projectsContainer.appendChild(projectButton);
+  return projectButton;
+};
+
 export const createProjectSection = (project) => {
   const main = document.querySelector('main');
   const projectHeader = createProjectHeader(project.title, project.desc);
