@@ -123,7 +123,8 @@ const addTodoDeleteHandler = (key=null) => {
   addButtonListHandler(query, handleDeleteTodo);
 };
 
-const addChecklistItemDeleteHandler = (key=null) => {
+// refactor to use named parameters
+const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {
   const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
     // get all keys
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItemDeleteButton);
@@ -136,16 +137,10 @@ const addChecklistItemDeleteHandler = (key=null) => {
     htmlHandler.updateChecklist(todoKey, checklist);
   
     // re-add event handlers to delete buttons for checklist items
-    addChecklistItemDeleteHandler(key);
+    const query = `.todo[data-key="${todoKey}"] > .checklist button.delete`;
+    addChecklistItemDeleteHandler(query);
   };
-
-  let query;
-  if (key) {
-    query = `.todo[data-key="${todoKey}"] > .checklist button.delete`
-  } else {
-    query = '.checklist-item button.delete';
-  }
-
+  
   addButtonListHandler(query, handleDeleteChecklistItem);
 };
 
