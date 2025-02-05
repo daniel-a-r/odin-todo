@@ -103,6 +103,8 @@ export const getLastProjectIndex = () => projectList.length - 1;
 
 export const getProject = (index) => projectList.at(index);
 
+export const getLastProject = () => getProject(-1);
+
 export const getTodo = (i, j) => projectList[i].todoList.at(j);
 
 export const getLastTodo = (i) => getTodo(i, -1);
@@ -113,7 +115,11 @@ export const getChecklist = (i, j) => projectList[i].todoList[j].checklist;
 
 export const getChecklistItem = (i, j, k) => projectList[i].todoList[j].checklist.at(k);
 
-export const getLastProject = () => getProject(-1);
+export const getLastChecklistItem = (i, j) => getChecklistItem(i, j, -1);
+
+export const getLastChecklistItemIndex = (projectIndx, todoListIndx) => {
+  return projectList[projectIndx].todoList[todoListIndx].checklist.length - 1;
+};
 
 export const updateProjectTitle = (i, newTitle) => { 
   projectList[i].title = newTitle;

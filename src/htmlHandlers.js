@@ -231,6 +231,13 @@ const createChecklist = (todoChecklist) => {
   return checklistDiv;
 };
 
+export const appendChecklistItem = (todoKey, checklistItemObj, indx) => {
+  const checklistDiv = document.querySelector(`.todo[data-key="${todoKey}"] > .checklist`);
+  const checklistItemDiv = createChecklistItem(checklistItemObj, indx);
+  checklistDiv.appendChild(checklistItemDiv);
+  return checklistItemDiv;
+};
+
 const createChecklistItem = (checklistItemObj, indx) => {
   const checklistItemDiv = document.createElement('div');
   checklistItemDiv.classList.add('checklist-item');

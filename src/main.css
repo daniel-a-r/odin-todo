@@ -308,7 +308,7 @@ input[type="checkbox"] {
 }
 
 button.add-todo,
-.add-checklist-item {
+button.add-checklist-item {
   background-color: var(--hover-color);
 }
 
