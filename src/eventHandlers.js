@@ -51,7 +51,7 @@ const addMainEventHandlers = () => {
   // delete handlers
   addProjectDeleteHandler();
   addTodoDeleteHandler();
-  addChecklistItemDeleteHandler();
+  addDeleteChecklistItemHandler();
 
   // edit handlers
   addCheckboxHandler();
@@ -123,8 +123,7 @@ const addTodoDeleteHandler = (key=null) => {
   addButtonListHandler(query, handleDeleteTodo);
 };
 
-// refactor to use named parameters
-const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') => {
+const addDeleteChecklistItemHandler = (query='.checklist-item button.delete') => {
   const handleDeleteChecklistItem = (checklistItemDeleteButton) => {
     // get all keys
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItemDeleteButton);
@@ -136,9 +135,13 @@ const addChecklistItemDeleteHandler = (query='.checklist-item button.delete') =>
     const checklist = storage.getChecklist(selectedProjectKey, todoKey);
     htmlHandler.updateChecklist(todoKey, checklist);
   
-    // re-add event handlers to delete buttons for checklist items
-    const query = `.todo[data-key="${todoKey}"] > .checklist button.delete`;
-    addChecklistItemDeleteHandler(query);
+    // re-add event handlers to delete/edit buttons for checklist items
+    const baseQuery = `.todo[data-key="${todoKey}"] > .checklist button.`;
+    const deleteBtnQuery = `${baseQuery}delete`;
+    const editBtnQuery = `${baseQuery}edit`;
+
+    addDeleteChecklistItemHandler(deleteBtnQuery);
+    addEditChecklistItemHandler(editBtnQuery);
   };
   
   addButtonListHandler(query, handleDeleteChecklistItem);
@@ -207,7 +210,7 @@ const addEditChecklistItemSubmitHandler = () => {
     htmlHandler.updateChecklistItem(editingChecklistItem, checklistItemObj);
   
     addEditChecklistItemHandler('.editing button.edit');
-    addChecklistItemDeleteHandler('.editing button.delete');
+    addDeleteChecklistItemHandler('.editing button.delete');
     addCheckboxHandler('.editing input[type="checkbox"]');
     
     form.reset();
