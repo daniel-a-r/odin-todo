@@ -235,7 +235,7 @@ li {
 
 .checklist {
   padding: 1rem 0.25rem;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.625rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
