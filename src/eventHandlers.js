@@ -442,8 +442,6 @@ const addCreateChecklistItemSubmitHandler = () => {
     addCheckboxHandler(todoKey, checklistItemKey);
     addDeleteChecklistItemHandler(todoKey, checklistItemKey);
     addEditChecklistItemHandler(todoKey, checklistItemKey);
-    
-    console.log({checklistItemKey});
 
     form.reset();
   };
