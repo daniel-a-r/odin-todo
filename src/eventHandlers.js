@@ -1,6 +1,5 @@
 import * as storage from './storageHandlers.js';
 import * as htmlHandler from './htmlHandlers.js';
-import { da } from 'date-fns/locale';
 
 export const init = () => {
   addProjectListSelectEvent();
@@ -159,9 +158,8 @@ const addDeleteChecklistItemHandler = (todoKey=null, checklistItemKey=null) => {
 
 // edit handlers
 const addCheckboxHandler = (todoKey=null, checklistItemKey=null) => {
-  // TODO: delete checkbox parameter since variable can be accessed via closures.
-  const handleCheckboxChange = (checkbox) => {
-    const checklistItem = checkbox.closest('.checklist-item');
+  function handleCheckboxChange() {
+    const checklistItem = this.closest('.checklist-item');
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItem);
     storage.updateChecklistItemIsDone(selectedProjectKey, todoKey, checklistItemKey);
   };
@@ -176,7 +174,7 @@ const addCheckboxHandler = (todoKey=null, checklistItemKey=null) => {
 
   const checkboxList = document.querySelectorAll(query);
   for (const checkbox of checkboxList) {
-    checkbox.addEventListener('change', () => handleCheckboxChange(checkbox));
+    checkbox.addEventListener('change', handleCheckboxChange);
   }
 };
 
