@@ -73,7 +73,7 @@ const addButtonListHandler = (query, handler) => {
 
 // delete handlers
 const addProjectDeleteHandler = () => {
-  function handleDeleteProject() {
+  const handleDeleteProject = () => {
     // get selected project key 
     const selectedProjectKey = getSelectedProjectKey();
     
@@ -111,7 +111,7 @@ const addTodoDeleteHandler = (key=null) => {
   
     // re-add event handlers
     addMainEventHandlers();
-  };
+  }
 
   let query;
 
@@ -143,7 +143,7 @@ const addDeleteChecklistItemHandler = (todoKey=null, checklistItemKey=null) => {
 
     addDeleteChecklistItemHandler(deleteBtnQuery);
     addEditChecklistItemHandler(editBtnQuery);
-  };
+  }
 
   let query;
 
@@ -162,7 +162,7 @@ const addCheckboxHandler = (todoKey=null, checklistItemKey=null) => {
     const checklistItem = this.closest('.checklist-item');
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItem);
     storage.updateChecklistItemIsDone(selectedProjectKey, todoKey, checklistItemKey);
-  };
+  }
 
   let query;
 
@@ -176,7 +176,7 @@ const addCheckboxHandler = (todoKey=null, checklistItemKey=null) => {
   for (const checkbox of checkboxList) {
     checkbox.addEventListener('change', handleCheckboxChange);
   }
-};
+}
 
 const addEditChecklistItemHandler = (todoKey=null, checklistItemKey=null) => {
   function handleEditChecklistItem() {
@@ -204,7 +204,7 @@ const addEditChecklistItemHandler = (todoKey=null, checklistItemKey=null) => {
   
     const editChecklistItemModal = document.querySelector('dialog.edit-checklist-item');
     editChecklistItemModal.showModal();
-  };
+  }
 
   let query;
 
@@ -240,7 +240,7 @@ const addEditChecklistItemSubmitHandler = () => {
     
     form.reset();
     removeEditingClass();
-  };
+  }
 
   const form = document.querySelector('.edit-checklist-item form');
   form.addEventListener('submit', handleEditChecklistItemSubmit);
@@ -261,7 +261,7 @@ const addEditTodoHandler = (key=null) => {
   
     const editTodoModal = document.querySelector('dialog.edit-todo');
     editTodoModal.showModal();
-  };
+  }
 
   let query;
   if (key) {
@@ -444,7 +444,7 @@ const addCreateChecklistItemSubmitHandler = () => {
     addEditChecklistItemHandler(todoKey, checklistItemKey);
 
     form.reset();
-  };
+  }
 
   const form = document.querySelector('dialog.add-checklist-item form');
   form.addEventListener('submit', handleAddChecklistItemSubmit);
