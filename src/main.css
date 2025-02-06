@@ -166,7 +166,6 @@ ul {
 
 li {
   list-style: none;
-  
 }
 
 .edit,
@@ -253,7 +252,7 @@ li {
   }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   margin: 0;
   height: 1rem;
   aspect-ratio: 1/1;
@@ -288,11 +287,11 @@ input[type="checkbox"] {
 }
 
 .priority.important {
- border: var(--priority-important-border);
+  border: var(--priority-important-border);
 
- p {
-  color: var(--priority-important-text-color);
- }
+  p {
+    color: var(--priority-important-text-color);
+  }
 }
 
 .priority.urgent {
@@ -303,7 +302,7 @@ input[type="checkbox"] {
   }
 }
 
- button.add-todo {
+button.add-todo {
   align-self: center;
 }
 

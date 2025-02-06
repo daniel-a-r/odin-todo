@@ -1,4 +1,4 @@
-import './main.css'
+import './main.css';
 import * as storage from './storageHandlers.js';
 import * as htmlHandler from './htmlHandlers.js';
 import * as eventHandlers from './eventHandlers.js';
@@ -14,5 +14,5 @@ const page = (function () {
     htmlHandler.init(storage.getProjectTitles());
   }
 
-  eventHandlers.init(); 
+  eventHandlers.init();
 })();

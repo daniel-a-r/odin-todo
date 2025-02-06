@@ -5,12 +5,12 @@ export const init = () => {
   addProjectListSelectEvent();
 
   addCreateProjectHandler();
-  
+
   // form submit handlers
   addEditProjectSubmitHandler();
   addEditTodoSubmitHandler();
   addEditChecklistItemSubmitHandler();
-  addCreateProjectSubmitHandler()
+  addCreateProjectSubmitHandler();
   addCreateTodoSubmitHandler();
   addCreateChecklistItemSubmitHandler();
 
@@ -45,7 +45,7 @@ function handleProjectSelect() {
   htmlHandler.createProjectSection(project);
   storage.setSelectedProject(newSelectedProjectKey);
   addMainEventHandlers();
-};
+}
 
 const addMainEventHandlers = () => {
   // delete handlers
@@ -59,7 +59,7 @@ const addMainEventHandlers = () => {
   addEditTodoHandler();
   addEditProjectHandler();
 
-  // create handlers 
+  // create handlers
   addCreateTodoHandler();
   addCreateChecklistItemHandler();
 };
@@ -74,16 +74,16 @@ const addButtonListHandler = (query, handler) => {
 // delete handlers
 const addProjectDeleteHandler = () => {
   const handleDeleteProject = () => {
-    // get selected project key 
+    // get selected project key
     const selectedProjectKey = getSelectedProjectKey();
-    
+
     // update local storage
     storage.removeProject(selectedProjectKey);
     storage.deleteSelectedProject();
-  
+
     // update frontend
     htmlHandler.deleteProject(storage.getProjectTitles());
-  
+
     // re-add project event listeners
     addProjectListSelectEvent();
   };
@@ -92,23 +92,23 @@ const addProjectDeleteHandler = () => {
   deleteProjectButton.addEventListener('click', handleDeleteProject);
 };
 
-const addTodoDeleteHandler = (key=null) => {
+const addTodoDeleteHandler = (key = null) => {
   function handleDeleteTodo() {
     // get HTML elements with data keys
     const todoElem = this.closest('.todo');
     const selectedProject = document.querySelector('button.selected');
-  
+
     // store keys in variables
     const todoKey = todoElem.dataset.key;
     const selectedProjectKey = selectedProject.dataset.key;
     const projectObj = storage.getProject(selectedProjectKey);
-  
+
     // update local storage
     storage.removeTodo(selectedProjectKey, todoKey);
-  
+
     // update frontend
     htmlHandler.updateMain(projectObj);
-  
+
     // re-add event handlers
     addMainEventHandlers();
   }
@@ -124,18 +124,18 @@ const addTodoDeleteHandler = (key=null) => {
   addButtonListHandler(query, handleDeleteTodo);
 };
 
-const addDeleteChecklistItemHandler = (todoKey=null, checklistItemKey=null) => {
+const addDeleteChecklistItemHandler = (todoKey = null, checklistItemKey = null) => {
   function handleDeleteChecklistItem() {
     // get all keys
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(this);
-  
+
     // update local storage
     storage.removeChecklistItem(selectedProjectKey, todoKey, checklistItemKey);
-  
+
     // update frontend with updated local storage
     const checklist = storage.getChecklist(selectedProjectKey, todoKey);
     htmlHandler.updateChecklist(todoKey, checklist);
-  
+
     // re-add event handlers to delete/edit buttons for checklist items
     const baseQuery = `.todo[data-key="${todoKey}"] > .checklist button.`;
     const deleteBtnQuery = `${baseQuery}delete`;
@@ -152,12 +152,12 @@ const addDeleteChecklistItemHandler = (todoKey=null, checklistItemKey=null) => {
   } else {
     query = '.checklist-item button.delete';
   }
-  
+
   addButtonListHandler(query, handleDeleteChecklistItem);
 };
 
 // edit handlers
-const addCheckboxHandler = (todoKey=null, checklistItemKey=null) => {
+const addCheckboxHandler = (todoKey = null, checklistItemKey = null) => {
   function handleCheckboxChange() {
     const checklistItem = this.closest('.checklist-item');
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItem);
@@ -176,32 +176,32 @@ const addCheckboxHandler = (todoKey=null, checklistItemKey=null) => {
   for (const checkbox of checkboxList) {
     checkbox.addEventListener('change', handleCheckboxChange);
   }
-}
+};
 
-const addEditChecklistItemHandler = (todoKey=null, checklistItemKey=null) => {
+const addEditChecklistItemHandler = (todoKey = null, checklistItemKey = null) => {
   function handleEditChecklistItem() {
     const checklistItem = this.closest('.checklist-item');
     checklistItem.classList.add('editing');
-  
+
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(checklistItem);
-  
+
     const checklistItemObj = storage.getChecklistItem(selectedProjectKey, todoKey, checklistItemKey);
-  
+
     const textInputElem = document.querySelector('#checklist-item-title');
     textInputElem.value = checklistItemObj.text;
-  
+
     const currentDueDate = checklistItemObj.dueDate;
     if (currentDueDate) {
       const dateElem = document.querySelector('#due-date');
       dateElem.value = currentDueDate;
     }
-  
+
     const currentPriority = checklistItemObj.priority;
     if (currentPriority) {
       const selectElem = document.querySelector('#priority-select');
       selectElem.value = currentPriority;
     }
-  
+
     const editChecklistItemModal = document.querySelector('dialog.edit-checklist-item');
     editChecklistItemModal.showModal();
   }
@@ -221,23 +221,23 @@ const addEditChecklistItemSubmitHandler = () => {
   function handleEditChecklistItemSubmit() {
     const data = new FormData(this);
     const title = data.get('title');
-    const dueDate = (data.get('due-date')) ? data.get('due-date') : null;
-    const priority = (data.get('priority')) ? data.get('priority') : null;
-  
+    const dueDate = data.get('due-date') ? data.get('due-date') : null;
+    const priority = data.get('priority') ? data.get('priority') : null;
+
     const editingChecklistItem = document.querySelector('.editing');
     const { selectedProjectKey, todoKey, checklistItemKey } = getAllKeys(editingChecklistItem);
-  
+
     storage.updateChecklistItemText(selectedProjectKey, todoKey, checklistItemKey, title);
     storage.updateChecklistItemPriority(selectedProjectKey, todoKey, checklistItemKey, priority);
     storage.updateChecklistItemDueDate(selectedProjectKey, todoKey, checklistItemKey, dueDate);
-  
+
     const checklistItemObj = storage.getChecklistItem(selectedProjectKey, todoKey, checklistItemKey);
     htmlHandler.updateChecklistItem(editingChecklistItem, checklistItemObj);
-  
+
     addEditChecklistItemHandler('.editing button.edit');
     addDeleteChecklistItemHandler('.editing button.delete');
     addCheckboxHandler('.editing input[type="checkbox"]');
-    
+
     form.reset();
     removeEditingClass();
   }
@@ -246,19 +246,19 @@ const addEditChecklistItemSubmitHandler = () => {
   form.addEventListener('submit', handleEditChecklistItemSubmit);
 };
 
-const addEditTodoHandler = (key=null) => {
+const addEditTodoHandler = (key = null) => {
   function handleEditTodo() {
-    const todoElem = this.closest('.todo')
+    const todoElem = this.closest('.todo');
     todoElem.classList.add('editing');
-  
+
     const todoKey = todoElem.dataset.key;
     const selectedProjectKey = getSelectedProjectKey();
-  
+
     const todoObj = storage.getTodo(selectedProjectKey, todoKey);
-  
+
     const textInputElem = document.querySelector('#todo-title');
     textInputElem.value = todoObj.title;
-  
+
     const editTodoModal = document.querySelector('dialog.edit-todo');
     editTodoModal.showModal();
   }
@@ -316,7 +316,7 @@ const addEditProjectSubmitHandler = () => {
   function handleEditProjectSubmit() {
     const data = new FormData(this);
     const title = data.get('title');
-    const desc = (data.get('desc')) ? data.get('desc') : null;
+    const desc = data.get('desc') ? data.get('desc') : null;
     const selectedProjectKey = getSelectedProjectKey();
 
     storage.updateProjectTitle(selectedProjectKey, title);
@@ -342,7 +342,7 @@ const addCloseModalHandler = () => {
   addButtonListHandler(query, handleCloseModal);
 };
 
-// create handlers 
+// create handlers
 const addCreateProjectHandler = () => {
   function handleCreateProject() {
     const addProjectModal = document.querySelector('dialog.add-project');
@@ -357,7 +357,7 @@ const addCreateProjectSubmitHandler = () => {
   function handleAddProjectSubmit() {
     const data = new FormData(this);
     const title = data.get('title');
-    const desc = (data.get('desc')) ? data.get('desc') : null;
+    const desc = data.get('desc') ? data.get('desc') : null;
 
     storage.createProject(title, desc);
     const lastProj = storage.getLastProject();
@@ -401,7 +401,7 @@ const addCreateTodoSubmitHandler = () => {
   form.addEventListener('submit', handleAddTodoSubmit);
 };
 
-const addCreateChecklistItemHandler = (todoKey=null) => {
+const addCreateChecklistItemHandler = (todoKey = null) => {
   function handleCreateChecklistItem() {
     const todoElem = this.closest('.todo');
     const todoKey = todoElem.dataset.key;
@@ -417,7 +417,7 @@ const addCreateChecklistItemHandler = (todoKey=null) => {
   } else {
     query = 'button.add-checklist-item';
   }
-  
+
   addButtonListHandler(query, handleCreateChecklistItem);
 };
 

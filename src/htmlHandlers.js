@@ -1,12 +1,12 @@
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
-export const init = (projectTitleList, indx=null, projObj=null) => {
+export const init = (projectTitleList, indx = null, projObj = null) => {
   const projectsContainer = document.querySelector('.projects-container');
   const projectButtons = createProjectButtonList(projectTitleList);
   projectsContainer.append(...projectButtons);
 
   if (indx) {
-    const selectedProject = projectsContainer.children[indx]
+    const selectedProject = projectsContainer.children[indx];
     selectedProject.classList.add('selected');
     createProjectSection(projObj);
   }
@@ -24,17 +24,20 @@ const createSVG = (pathDrawn) => {
 };
 
 const createPlusCircle = () => {
-  const pathDrawn = 'M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z';
+  const pathDrawn =
+    'M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z';
   return createSVG(pathDrawn);
 };
 
 const createInbox = () => {
-  const pathDrawn = 'M19,15H15A3,3 0 0,1 12,18A3,3 0 0,1 9,15H5V5H19M19,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z';
+  const pathDrawn =
+    'M19,15H15A3,3 0 0,1 12,18A3,3 0 0,1 9,15H5V5H19M19,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z';
   return createSVG(pathDrawn);
 };
 
 const createDotsHorizontal = () => {
-  const pathDrawn = 'M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z';
+  const pathDrawn =
+    'M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z';
   return createSVG(pathDrawn);
 };
 
@@ -132,7 +135,7 @@ const createDropdownOptions = () => {
   const ul = document.createElement('ul');
   const editButton = createEditButton();
   const deleteButton = createDeleteButton();
-  
+
   ul.append(editButton, deleteButton);
   div.appendChild(ul);
 
@@ -203,7 +206,7 @@ export const appendTodo = (todo, indx) => {
   const todoElem = createTodo(todo, indx);
   todoContainer.appendChild(todoElem);
   return todoElem;
-}
+};
 
 const createTodoTitle = (todoTitle) => {
   const todoTitleDiv = document.createElement('div');
@@ -288,7 +291,7 @@ const createChecklistItemText = (text) => {
 const createDueDateTag = (dueDate) => {
   // format date
   let dateList = dueDate.split('-');
-  dateList = dateList.map(e => Number(e));
+  dateList = dateList.map((e) => Number(e));
   dateList[1] = dateList[1] - 1;
   const date = new Date(dateList[0], dateList[1], dateList[2]);
   const currentYear = new Date().getFullYear();
@@ -302,7 +305,7 @@ const createDueDateTag = (dueDate) => {
   }
 
   // create elements
-  const dueDateTag = document.createElement('div')
+  const dueDateTag = document.createElement('div');
   dueDateTag.classList.add('due-date');
 
   const para = document.createElement('p');
@@ -355,7 +358,7 @@ const clearElem = (elem) => {
   while (elem.hasChildNodes()) {
     elem.removeChild(elem.lastChild);
   }
-}
+};
 
 export const clearMain = () => {
   const main = document.querySelector('main');
