@@ -3,7 +3,7 @@ import * as storage from './storageHandlers.js';
 import * as htmlHandler from './htmlHandlers.js';
 import * as eventHandlers from './eventHandlers.js';
 
-const page = (function () {
+(() => {
   storage.init();
 
   if (storage.getSelectedProject()) {
